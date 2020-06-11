@@ -20,8 +20,7 @@ namespace HomeShop.API.Controller
          [HttpPost("register")]
         //we are using DTO to parse into register method 
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDtos)
-        {
-            //episode 31 - 
+        {            
             //validate request 
             userForRegisterDtos.UserName = userForRegisterDtos.UserName.ToLower();
 
