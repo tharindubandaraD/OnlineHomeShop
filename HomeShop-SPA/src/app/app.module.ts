@@ -8,12 +8,18 @@ import { ValueComponent } from './value/value.component';
 import { from } from 'rxjs';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
+import { HomeComponent } from './home/home.component';
+import { ProductComponent } from './product/product.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       ValueComponent,
-      NavComponent
+      NavComponent,
+      HomeComponent,
+      ProductComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule,
