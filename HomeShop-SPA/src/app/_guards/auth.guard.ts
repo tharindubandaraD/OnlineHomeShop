@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     {
       return true;
     }
-    this.alertify.error('cannot access this path..!!');
+    this.alertify.error('cannot access..!!');
     this.route.navigate(['/home']);
     return false;
   }
