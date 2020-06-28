@@ -8,18 +8,19 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 
 
-
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
 import { from } from 'rxjs';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
-import { ProductComponent } from './product/product.component';
 import { RegisterComponent } from './register/register.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { CartComponent } from './cart/cart.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ProductComponent } from './products/product/product.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { CartComponent } from './cart/cart.component';
+import { Product_cardComponent } from './products/product_card/product_card.component';
+
 @NgModule({
    declarations: [
       AppComponent,
@@ -29,6 +30,7 @@ import { MessagesComponent } from './messages/messages.component';
       ProductComponent,
       RegisterComponent,
       ProductListComponent,
+      Product_cardComponent,
       CartComponent,
       MessagesComponent
    ],

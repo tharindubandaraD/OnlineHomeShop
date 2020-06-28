@@ -18,7 +18,9 @@ namespace HomeShop.API.Model
 
         public int PublicId { get; set; }
 
-        public ICollection<Product> Product { get; set;}
+        public Product Product { get; set; }
+
+        public int ProductId { get; set; }
       
     }
 }

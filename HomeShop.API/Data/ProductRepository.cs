@@ -24,13 +24,13 @@ namespace HomeShop.API.Data
 
         public async Task<Product> GetProduct(int id)
         {
-            var product = await _context.Products.Include(p => p.Photo).FirstOrDefaultAsync(i => i.Id == id);
+            var product = await _context.Products.Include(p => p.Photos).FirstOrDefaultAsync(i => i.Id == id);
             return product;
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            var products = await _context.Products.Include(p => p.Photo).ToListAsync();
+            var products = await _context.Products.Include(p => p.Photos).ToListAsync();
             return products;
         }
 

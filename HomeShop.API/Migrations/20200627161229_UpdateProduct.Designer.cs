@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeShop.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200624052743_ProducPhotoEntities")]
-    partial class ProducPhotoEntities
+    [Migration("20200627161229_UpdateProduct")]
+    partial class UpdateProduct
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,9 @@ namespace HomeShop.API.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("PublicId")
                         .HasColumnType("INTEGER");
 
@@ -40,6 +43,8 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Photos");
                 });
@@ -62,9 +67,6 @@ namespace HomeShop.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PhotoId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
@@ -72,8 +74,6 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PhotoId");
 
                     b.ToTable("Products");
                 });
@@ -142,11 +142,11 @@ namespace HomeShop.API.Migrations
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("HomeShop.API.Model.Product", b =>
+            modelBuilder.Entity("HomeShop.API.Model.Photo", b =>
                 {
-                    b.HasOne("HomeShop.API.Model.Photo", "Photo")
-                        .WithMany("Product")
-                        .HasForeignKey("PhotoId")
+                    b.HasOne("HomeShop.API.Model.Product", "Product")
+                        .WithMany("Photos")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

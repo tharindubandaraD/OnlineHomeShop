@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using HomeShop.API.Model;
 
 namespace HomeShop.API.Dtos
 {
     public class ProductDetailDto
     {
-          public int Id { get; set; }
+        public int Id { get; set; }
 
         public string Category { get; set; }
 
@@ -17,8 +18,11 @@ namespace HomeShop.API.Dtos
         public double Price { get; set; }
 
         public double Discount { get; set; }
+        
+        public string  PhotoUrl { get; set; }
 
-        public PhotosForDetailDto Photo { get; set; }
+        public  ICollection<PhotosForDetailDto> Photos { get; set; }
+
 
     }
 }

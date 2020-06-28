@@ -18,8 +18,7 @@ namespace HomeShop.API.Model
 
         public double Discount { get; set; }
 
-        public Photo Photo { get; set; }
-
-        public int PhotoId { get; set; }
+        public ICollection<Photo> Photos { get; set; }
+   
     }
 }
