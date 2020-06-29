@@ -32,7 +32,7 @@ namespace HomeShop.API.Model {
 
         public string Country { get; set; }
 
-        //public ICollection<Photo> Photos { get; set; }
+        public ICollection<Order>  Orders{ get; set; }
 
     }
 }

@@ -10,7 +10,6 @@ namespace HomeShop.API.Data
         using the OnConfiguring method. This method gets the 
         DbContextOptionsBuilder as its argument. It is then used to create the dbContextOptions*/
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
-        public DbSet<Value> Values {get; set;}        
         public DbSet<User> Users {get; set;}
         public DbSet<Product> Products {get; set;}
         public DbSet<Photo> Photos { get; set; }

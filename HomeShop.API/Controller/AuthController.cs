@@ -53,7 +53,7 @@ namespace HomeShop.API.Controller
             var userFromRepo = await _repo.Login(userForLoginDtos.Username.ToLower(), userForLoginDtos.Password);
 
             if (userFromRepo == null)
-                return Unauthorized();
+                return Unauthorized(); 
 
             var claims = new[]
             {
