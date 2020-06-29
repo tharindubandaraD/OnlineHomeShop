@@ -21,8 +21,7 @@ namespace HomeShop.API.Dtos
         
         public string  PhotoUrl { get; set; }
 
-        public  ICollection<PhotosForDetailDto> Photos { get; set; }
-
+        public  ICollection<PhotosForDetailDto> Photos { get; set; }    
 
     }
 }

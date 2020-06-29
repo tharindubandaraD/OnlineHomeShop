@@ -14,15 +14,19 @@ namespace HomeShop.API.Model
 
         public double Price { get; set; }
 
-        public double Discount { get; set; }
+        public double Discount { get; set; }       
+
+        public ICollection<Photo> Photos { get; set; }
+
+        public ICollection<OrderProduct> OrderProducts { get; set; }
 
         public Category Category { get; set; }
 
         public int CategoryId { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public Brand Brand { get; set; }
 
-        public ICollection<OrderProduct> OrderProducts { get; set; }
+        public int BrandId { get; set; }
         
    
     }

@@ -3,22 +3,34 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HomeShop.API.Migrations
 {
-    public partial class ConvertMssql : Migration
+    public partial class UpdatedMssql : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Brands",
+                columns: table => new
+                {
+                    BrandId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BrandName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brands", x => x.BrandId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
                 columns: table => new
                 {
                     CategoryID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Brand = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CategoryID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,21 +69,28 @@ namespace HomeShop.API.Migrations
                     Description = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
                     Discount = table.Column<double>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false),
+                    BrandId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Category_CategoryId",
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "BrandId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderProduct",
+                name: "OrderProducts",
                 columns: table => new
                 {
                     OrderproductId = table.Column<int>(nullable: false)
@@ -80,9 +99,9 @@ namespace HomeShop.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderProduct", x => x.OrderproductId);
+                    table.PrimaryKey("PK_OrderProducts", x => x.OrderproductId);
                     table.ForeignKey(
-                        name: "FK_OrderProduct_Products_ProductId",
+                        name: "FK_OrderProducts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -114,7 +133,7 @@ namespace HomeShop.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     OrderID = table.Column<int>(nullable: false)
@@ -127,15 +146,15 @@ namespace HomeShop.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OrderID);
+                    table.PrimaryKey("PK_Orders", x => x.OrderID);
                     table.ForeignKey(
-                        name: "FK_Order_OrderProduct_OrderProductId",
+                        name: "FK_Orders_OrderProducts_OrderProductId",
                         column: x => x.OrderProductId,
-                        principalTable: "OrderProduct",
+                        principalTable: "OrderProducts",
                         principalColumn: "OrderproductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Order_Users_UserID",
+                        name: "FK_Orders_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -143,24 +162,29 @@ namespace HomeShop.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_OrderProductId",
-                table: "Order",
+                name: "IX_OrderProducts_ProductId",
+                table: "OrderProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderProductId",
+                table: "Orders",
                 column: "OrderProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_UserID",
-                table: "Order",
+                name: "IX_Orders_UserID",
+                table: "Orders",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderProduct_ProductId",
-                table: "OrderProduct",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_ProductId",
                 table: "Photos",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_BrandId",
+                table: "Products",
+                column: "BrandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -171,13 +195,13 @@ namespace HomeShop.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "OrderProduct");
+                name: "OrderProducts");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -186,7 +210,10 @@ namespace HomeShop.API.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

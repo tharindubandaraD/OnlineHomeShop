@@ -19,6 +19,21 @@ namespace HomeShop.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HomeShop.API.Model.Brand", b =>
+                {
+                    b.Property<int>("BrandId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BrandName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BrandId");
+
+                    b.ToTable("Brands");
+                });
+
             modelBuilder.Entity("HomeShop.API.Model.Category", b =>
                 {
                     b.Property<int>("CategoryID")
@@ -26,15 +41,12 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("HomeShop.API.Model.Order", b =>
@@ -65,7 +77,7 @@ namespace HomeShop.API.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("HomeShop.API.Model.OrderProduct", b =>
@@ -82,7 +94,7 @@ namespace HomeShop.API.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProduct");
+                    b.ToTable("OrderProducts");
                 });
 
             modelBuilder.Entity("HomeShop.API.Model.Photo", b =>
@@ -124,6 +136,9 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -143,6 +158,8 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
@@ -235,6 +252,12 @@ namespace HomeShop.API.Migrations
 
             modelBuilder.Entity("HomeShop.API.Model.Product", b =>
                 {
+                    b.HasOne("HomeShop.API.Model.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HomeShop.API.Model.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")

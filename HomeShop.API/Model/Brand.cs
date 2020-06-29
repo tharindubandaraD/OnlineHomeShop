@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace HomeShop.API.Model
 {
-    public class Category
+    public class Brand
     {
-        public int CategoryID { get; set; }
-        public string Name { get; set; }
+        public int BrandId { get; set; }
+        public string  BrandName { get; set; }
         public ICollection<Product> Products { get; set; }
     }
 }
