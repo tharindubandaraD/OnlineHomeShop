@@ -20,6 +20,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using HomeShop.API.Business;
+using HomeShop.API.Data.CategoryRepository;
 
 namespace HomeShop.API
 {
@@ -43,9 +45,15 @@ namespace HomeShop.API
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
+
             services.AddAutoMapper(typeof(ProductRepository).Assembly);
+            services.AddAutoMapper(typeof(CategoryRepository).Assembly);
+
+            services.AddScoped<IAuthBusinessLayer,AuthBusinessLayer>();
+            services.AddScoped<IProductBusinessLayer, ProductBusinessLayer>();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IProductRepository,ProductRepository>();
+            services.AddScoped<ICategoryRepository,CategoryRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer( options => {
                 options.TokenValidationParameters = new TokenValidationParameters

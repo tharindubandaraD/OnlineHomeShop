@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using HomeShop.API.Business;
 using HomeShop.API.Data;
 using HomeShop.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -13,29 +14,28 @@ namespace HomeShop.API.Controller
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _repo;
-        private readonly IMapper _mapper;
-        public ProductController(IProductRepository repo, IMapper mapper)
+        private readonly IProductBusinessLayer _productBusinessLayer;
+        public ProductController(IProductBusinessLayer productBusinessLayer)
         {
-            _mapper = mapper;
-            _repo = repo;
+            _productBusinessLayer = productBusinessLayer;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            //gaeting data from db
-            var products = await _repo.GetProducts();
-            var prdoctsList = _mapper.Map<IEnumerable<ProductListDto>>(products);
-            return Ok(prdoctsList);
+            //gaeting data from db  
+            var products = await _productBusinessLayer.GetProducts();              
+            return Ok(products);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await _repo.GetProduct(id);
-            var productDetail = _mapper.Map<ProductDetailDto>(product);
+            var productDetail = await _productBusinessLayer.GetProduct(id);
             return Ok(productDetail);
         }
+
+       
+
     }
 }

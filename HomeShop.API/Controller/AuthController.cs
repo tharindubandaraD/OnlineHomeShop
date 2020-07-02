@@ -1,14 +1,8 @@
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using HomeShop.API.Data;
+using HomeShop.API.Business;
 using HomeShop.API.Dtos;
-using HomeShop.API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace HomeShop.API.Controller
 {
@@ -18,12 +12,12 @@ namespace HomeShop.API.Controller
 
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository _repo;
+        private readonly IAuthBusinessLayer _authbusiness;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        public AuthController(IConfiguration config,IAuthBusinessLayer authBusinessLayer)
         {
             _config = config;
-            _repo = repo;
+            _authbusiness = authBusinessLayer;
         }
 
         [HttpPost("register")]
@@ -31,17 +25,8 @@ namespace HomeShop.API.Controller
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDtos)
         {
             //validate request 
-            userForRegisterDtos.UserName = userForRegisterDtos.UserName.ToLower();
-
-            if (await _repo.UserExists(userForRegisterDtos.UserName))
-                return BadRequest("User already exisits");
-
-
-            var userToCreate = new User
-            {
-                Username = userForRegisterDtos.UserName
-            };
-            var createdUser = await _repo.Register(userToCreate, userForRegisterDtos.Password);
+            if(! await _authbusiness.Register(userForRegisterDtos))
+                    return BadRequest("User already exisits");
 
             return StatusCode(201);
 
@@ -50,35 +35,14 @@ namespace HomeShop.API.Controller
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDtos userForLoginDtos)
         {
-            var userFromRepo = await _repo.Login(userForLoginDtos.Username.ToLower(), userForLoginDtos.Password);
+            var userForLogin = await _authbusiness.Login(userForLoginDtos.Username.ToLower(), userForLoginDtos.Password);
 
-            if (userFromRepo == null)
-                return Unauthorized(); 
-
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name , userFromRepo.Username)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);           
+            if(userForLogin.Token == null)
+                return Unauthorized();
 
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)               
+                token = userForLogin.Token               
             });
 
         }
