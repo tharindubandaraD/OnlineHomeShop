@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using HomeShop.API.Business;
 using HomeShop.API.Data.CategoryRepository;
+using HomeShop.API.Data.BrandRepository;
 
 namespace HomeShop.API
 {
@@ -48,12 +49,15 @@ namespace HomeShop.API
 
             services.AddAutoMapper(typeof(ProductRepository).Assembly);
             services.AddAutoMapper(typeof(CategoryRepository).Assembly);
+            services.AddAutoMapper(typeof(BrandRepository).Assembly);
 
             services.AddScoped<IAuthBusinessLayer,AuthBusinessLayer>();
             services.AddScoped<IProductBusinessLayer, ProductBusinessLayer>();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();
+            services.AddScoped<IBrandRepository,BrandRepository>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer( options => {
                 options.TokenValidationParameters = new TokenValidationParameters
