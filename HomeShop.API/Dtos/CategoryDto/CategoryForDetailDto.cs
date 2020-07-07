@@ -5,9 +5,10 @@ namespace HomeShop.API.Dtos
 {
     public class CategoryForDetailDto
     {
-        public int CategoryId { get;set;}
-        public string Name { get; set; }
-        public ICollection<ProductListDto> Products { get; set; }
+        public string CategoryName { get;set;}
+        public string ProductName { get; set; }           
+        public string PhotoUrl { get; set; }
+        public double Price { get; set; }
         
     }
 }

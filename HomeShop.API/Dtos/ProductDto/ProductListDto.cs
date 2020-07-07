@@ -14,6 +14,7 @@ namespace HomeShop.API.Dtos
         public double Discount { get; set; }
         
         public string  PhotoUrl { get; set; }
+       
 
     }
 }

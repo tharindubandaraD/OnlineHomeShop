@@ -17,11 +17,13 @@ namespace HomeShop.API.Helpers
             .ForMember(dest => dest.PhotoUrl, opt => 
                 opt.MapFrom(src => src.Photos.FirstOrDefault( p=> p.IsMain).Url));
 
-           CreateMap<Category, CategoryForDetailDto>();  
+           CreateMap<Photo, PhotosForDetailDto>();
+
+           CreateMap<Category, CategoryForDetailDto>();      
 
            CreateMap<Brand, BrandforDetailDto>();  
 
-           CreateMap<Photo, PhotosForDetailDto>();
+          
         }
     }
 }
