@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
 
   loadProduct() {
     // tslint:disable-next-line: no-string-literal
-    this.productService.getProdct(+this.route.snapshot.params['Product.Id']).subscribe((product: Product) =>
+    this.productService.getProdct(+this.route.snapshot.params['id']).subscribe((product: Product) =>
     {
       this.product = product;
     }, error => {
