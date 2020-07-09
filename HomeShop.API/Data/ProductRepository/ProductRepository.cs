@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using HomeShop.API.Dtos;
 using HomeShop.API.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +39,27 @@ namespace HomeShop.API.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int id)
+        {
+            var products = await  (from category in _context.Categories join
+                                 product in _context.Products on  category.CategoryID equals product.CategoryId
+                                  join photo in _context.Photos on  product.Id equals photo.ProductId                                    
+                                    where product.CategoryId == id 
+                                    select new ProductDetailDto()
+                                    {    
+                                        Id = product.Id,                                   
+                                        CategoryId= product.CategoryId,
+                                        Quantity = product.Quantity,
+                                        Name = product.Name,
+                                        Discount = product.Discount,
+                                        Description = product.Description,
+                                        Price = product.Price,                                        
+                                        PhotoUrl = photo.Url
+                                        
+                                    }).ToListAsync();
+            return products;
         }
     }
 }

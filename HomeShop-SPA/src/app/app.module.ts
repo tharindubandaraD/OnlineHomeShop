@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,10 @@ import { ProductComponent } from './products/product/product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
 import { Product_cardComponent } from './products/product_card/product_card.component';
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -39,7 +44,15 @@ import { Product_cardComponent } from './products/product_card/product_card.comp
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRouters)
+      RouterModule.forRoot(appRouters),
+      JwtModule.forRoot({
+         config: {
+            // tslint:disable-next-line: object-literal-shorthand
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       AuthService,

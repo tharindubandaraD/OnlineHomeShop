@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeShop.API.Dtos;
 using HomeShop.API.Model;
 
 namespace HomeShop.API.Data
@@ -16,5 +17,7 @@ namespace HomeShop.API.Data
        Task<IEnumerable<Product>> GetProducts();
 
        Task<Product> GetProduct(int i);
+
+       Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int i);
     }
 }

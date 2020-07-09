@@ -22,21 +22,26 @@ namespace HomeShop.API.Data.CategoryRepository
         {
           //  var Categories = await _dataContext.Categories.Include(p => p.Products).ToListAsync();    
             
-            var Categories = await  (from c in _dataContext.Categories join
-                                 p in _dataContext.Products on  c.CategoryID equals p.CategoryId 
-                                    join pt in _dataContext.Photos on p.Id equals pt.ProductId 
-                                    where pt.IsMain == true 
+            var Categories = await  (from category in _dataContext.Categories join
+                                 product in _dataContext.Products on  category.CategoryID equals product.CategoryId 
+                                    join photo in _dataContext.Photos on product.Id equals photo.ProductId 
+                                    where photo.IsMain == true 
                                     select new CategoryForDetailDto()
                                     {
-                                        CategoryName = c.Name,
-                                        ProductName = p.Name,
-                                        PhotoUrl = pt.Url,
-                                        Price = p.Price
+                                        CategotyId = category.CategoryID,
+                                        CategoryName = category.Name,
+                                      //  ProductId = product.Id,
+                                      //  ProductName = product.Name,
+                                      //  PhotoUrl = photo.Url,
+                                      //  Price = product.Price
                                         
-                                    }).ToListAsync();
-
-
-            return Categories;
+                                    }).Distinct().ToListAsync();
+                                    
+                        return Categories;
         }
+
+     
+
+        
     } 
 }

@@ -9,5 +9,6 @@ namespace HomeShop.API.Business
     {
            Task<ProductDetailDto> GetProduct(int id);
            Task<IEnumerable<ProductListDto>> GetProducts();
+           Task <IEnumerable<ProductDetailDto>> GetProductbyCategory(int id);
     }
 }

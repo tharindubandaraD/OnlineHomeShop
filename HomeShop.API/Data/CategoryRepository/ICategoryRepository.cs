@@ -8,6 +8,6 @@ namespace HomeShop.API.Data.CategoryRepository
 {
     public interface ICategoryRepository
     {
-         Task<IEnumerable<CategoryForDetailDto>> GetCategory();
+         Task<IEnumerable<CategoryForDetailDto>> GetCategory();       
     }
 }

@@ -1,3 +1,4 @@
+import { Category } from './../../_models/category';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/_models/product';
@@ -12,14 +13,18 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class ProductListComponent implements OnInit {
 
   products: Product[];
+  category: Category[];
+  num: number;
   constructor(private productService: ProductService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadProducts();
+    this.loadCategory();
   }
 
-  loadProducts() {
-    this.productService.getProducts().subscribe((product: Product[]) => {
+  loadProducts(cat: Category) {
+    this.num = 1;
+    console.log(cat);
+    this.productService.getProductstoCategory(cat).subscribe((product: Product[]) => {
       this.products = product;
     },
     error => {
@@ -27,4 +32,13 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+
+  loadCategory() {
+    this.productService.getCategory().subscribe((category: Category[]) => {
+      this.category = category;
+    },
+    error => {
+      this.alertify.error(error);
+    });
+  }
 }

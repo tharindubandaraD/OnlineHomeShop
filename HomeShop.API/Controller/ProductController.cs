@@ -35,7 +35,13 @@ namespace HomeShop.API.Controller
             return Ok(productDetail);
         }
 
-       
+       [HttpGet("category/{id}")]
+        public async Task<IActionResult> getcategoryproduct(int id)
+        {
+            var productbyCategory = await _productBusinessLayer.GetProductbyCategory(id);
+            return Ok(productbyCategory);
+        }
+
 
     }
 }

@@ -23,6 +23,13 @@ namespace HomeShop.API.Business
             return productDetail;
         }
 
+        public async Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int id)
+        {
+           var productbyCategory = await _productRepository.GetProductbyCategory(id);
+         //  var productbyCategoryDetail = _mapper.Map<ProductDetailDto>(productbyCategory);
+           return productbyCategory;
+        }
+
         public async Task<IEnumerable<ProductListDto>> GetProducts()
         {
             var products = await _productRepository.GetProducts();

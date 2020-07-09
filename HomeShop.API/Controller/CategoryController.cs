@@ -28,5 +28,6 @@ namespace HomeShop.API.Controller
             
             return Ok(mapcategories);
         }
+    
     }
 }

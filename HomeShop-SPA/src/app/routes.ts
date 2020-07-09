@@ -1,3 +1,4 @@
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { CartComponent } from './cart/cart.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -14,9 +15,15 @@ export const appRouters: Routes = [
         canActivate: [AuthGuard],
         children: [
             {path: 'products', component: ProductListComponent},
+
+            {path: 'products/:id', component: ProductDetailComponent},
+
             {path: 'product', component: ProductComponent},
+
             {path: 'cart', component: CartComponent },
+
             {path: 'message', component: MessagesComponent},
+
         ]
     },
     {path: '**', redirectTo: '', pathMatch: 'full'}
