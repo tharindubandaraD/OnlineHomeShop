@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Category } from './../../_models/category';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -15,14 +16,16 @@ export class ProductListComponent implements OnInit {
   products: Product[];
   category: Category[];
   num: number;
-  constructor(private productService: ProductService, private alertify: AlertifyService) { }
+  constructor(private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadCategory();
+    this.route.data.subscribe(data => {
+      // tslint:disable-next-line: no-string-literal
+      this.category = data['category'];
+    });
   }
 
   loadProducts(cat: Category) {
-    this.num = 1;
     console.log(cat);
     this.productService.getProductstoCategory(cat).subscribe((product: Product[]) => {
       this.products = product;
@@ -33,12 +36,12 @@ export class ProductListComponent implements OnInit {
   }
 
 
-  loadCategory() {
+  /*loadCategory() {
     this.productService.getCategory().subscribe((category: Category[]) => {
       this.category = category;
     },
     error => {
       this.alertify.error(error);
     });
-  }
+  }*/
 }

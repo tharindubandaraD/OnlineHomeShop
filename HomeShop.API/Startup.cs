@@ -23,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using HomeShop.API.Business;
 using HomeShop.API.Data.CategoryRepository;
 using HomeShop.API.Data.BrandRepository;
+using HomeShop.API.Business._Category;
 
 namespace HomeShop.API
 {
@@ -53,6 +54,7 @@ namespace HomeShop.API
 
             services.AddScoped<IAuthBusinessLayer,AuthBusinessLayer>();
             services.AddScoped<IProductBusinessLayer, ProductBusinessLayer>();
+            services.AddScoped<ICategoryBusinessLayer,CategoryBusinessLayer>();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();

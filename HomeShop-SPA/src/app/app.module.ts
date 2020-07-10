@@ -1,3 +1,6 @@
+import { CategoryListResolver } from './_resolvers/category-list.resolver';
+import { ProductDetailResolver } from './_resolvers/product-detail.resolver';
+import { AuthGuard } from './_guards/auth.guard';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { appRouters } from './routes';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
@@ -18,7 +21,6 @@ import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MessagesComponent } from './messages/messages.component';
-import { ProductComponent } from './products/product/product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
 import { Product_cardComponent } from './products/product_card/product_card.component';
@@ -33,7 +35,6 @@ export function tokenGetter() {
       ValueComponent,
       NavComponent,
       HomeComponent,
-      ProductComponent,
       RegisterComponent,
       ProductListComponent,
       Product_cardComponent,
@@ -58,8 +59,10 @@ export function tokenGetter() {
       })
    ],
    providers: [
-      AuthService,
-      ErrorInterceptorProvider
+      ErrorInterceptorProvider,
+      AuthGuard,
+      ProductDetailResolver,
+      CategoryListResolver
    ],
    bootstrap: [
       AppComponent

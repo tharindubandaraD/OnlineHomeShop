@@ -29,11 +29,7 @@ namespace HomeShop.API.Data.CategoryRepository
                                     select new CategoryForDetailDto()
                                     {
                                         CategotyId = category.CategoryID,
-                                        CategoryName = category.Name,
-                                      //  ProductId = product.Id,
-                                      //  ProductName = product.Name,
-                                      //  PhotoUrl = photo.Url,
-                                      //  Price = product.Price
+                                        CategoryName = category.Name                                   
                                         
                                     }).Distinct().ToListAsync();
                                     

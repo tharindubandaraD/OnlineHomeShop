@@ -18,16 +18,9 @@ export class ProductDetailComponent implements OnInit {
   constructor(private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadProduct();
-  }
-
-  loadProduct() {
-    // tslint:disable-next-line: no-string-literal
-    this.productService.getProdct(+this.route.snapshot.params['id']).subscribe((product: Product) =>
-    {
-      this.product = product;
-    }, error => {
-      this.alertify.error(error);
+    this.route.data.subscribe(data => {
+      // tslint:disable-next-line: no-string-literal
+      this.product = data['product'];
     });
   }
 

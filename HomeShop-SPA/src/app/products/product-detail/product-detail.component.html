@@ -2,19 +2,20 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <img class="card-img-top img-thumbnail" src="{{product?.photoUrl}}" alt="{{product?.name}}">
+                <img class="card-img-top img-thumbnail" src="{{product.photoUrl}}" alt="{{product.name}}">
                 <div class="card-body">
                     <div>
                         <strong>Price:</strong>
-                        <p>{{product?.price}}</p>
+                        <p>{{product.price}}</p>
                     </div>
+                    
                     <div>
                         <strong>Name:</strong>
-                        <p>{{product?.name}}</p>
+                        <p>{{product.name}}</p>
                     </div>
                     <div>
                         <strong>Items Left:</strong>
-                        <p>{{product?.quantity}}</p>
+                        <p>{{product.quantity}}</p>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -28,15 +29,15 @@
         <div class="col-sm-8">
             <div class="tab-panel">
                 <tabset class="member-tabset">
-                  <tab heading="About {{product?.name}}">
+                  <tab heading="About {{product.name}}">
                     <h4>Description</h4>
-                    <p>{{product?.description}}</p>                  
+                    <p>{{product.description}}</p>                  
                   </tab>                 
                   <tab heading="Photos">
                    <p>Photos</p>
                   </tab>
                   <tab heading="Messages">
-                    <p>Messafe</p>
+                    <p>Message</p>
                   </tab>
                 </tabset>
               </div>

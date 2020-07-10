@@ -14,7 +14,7 @@
     <h6 class="card-title text-center mb-1">
       <i class="fa fa-shopping-cart"> {{product.name}}</i>
         <h4>Rs: {{product.price}} /=</h4>
-        <h5 *ngIf="(product.discount)!=0" class="card-text text-muted text-center">Discount: {{product.discount}}%</h5>
+        <h5 *ngIf="(product.discount)!=0" class="card-text text-muted text-center"> {{product.discount}}% OFF</h5>
     </h6>
    
   </div>
