@@ -46,7 +46,7 @@ namespace HomeShop.API.Data
             var products = await  (from category in _context.Categories join
                                  product in _context.Products on  category.CategoryID equals product.CategoryId
                                   join photo in _context.Photos on  product.Id equals photo.ProductId                                    
-                                    where product.CategoryId == id 
+                                    where photo.IsMain == true &&  product.CategoryId == id
                                     select new ProductDetailDto()
                                     {    
                                         Id = product.Id,                                   

@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
 
 
 import { AppComponent } from './app.component';
@@ -45,6 +47,7 @@ export function tokenGetter() {
    imports: [
       BrowserModule,
       HttpClientModule,
+      NgxGalleryModule ,
       FormsModule,
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
