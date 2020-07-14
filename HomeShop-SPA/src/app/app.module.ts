@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryListResolver } from './_resolvers/category-list.resolver';
 import { ProductDetailResolver } from './_resolvers/product-detail.resolver';
 import { AuthGuard } from './_guards/auth.guard';
@@ -7,7 +8,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -47,9 +49,12 @@ export function tokenGetter() {
    imports: [
       BrowserModule,
       HttpClientModule,
-      NgxGalleryModule ,
+      BrowserAnimationsModule,
+      NgxGalleryModule,
       FormsModule,
+      ReactiveFormsModule,
       BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRouters),
       JwtModule.forRoot({
