@@ -17,7 +17,9 @@ export class ProductDetailComponent implements OnInit {
   product: Product;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  cartComponentLoad = false;
 
+  // tslint:disable-next-line: max-line-length
   constructor(private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -53,5 +55,4 @@ export class ProductDetailComponent implements OnInit {
     }
     return imageUrls;
   }
-
 }

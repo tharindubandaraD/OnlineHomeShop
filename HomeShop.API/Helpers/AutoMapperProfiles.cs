@@ -1,6 +1,8 @@
 using System.Linq;
 using AutoMapper;
 using HomeShop.API.Dtos;
+using HomeShop.API.Dtos.OrderDto;
+using HomeShop.API.Dtos.OrderProductDto;
 using HomeShop.API.Model;
 
 namespace HomeShop.API.Helpers
@@ -23,7 +25,9 @@ namespace HomeShop.API.Helpers
 
            CreateMap<Brand, BrandforDetailDto>();  
 
-          
+           CreateMap<OrderDto, Order>();
+
+          CreateMap<OrderProductDto, OrderProduct>();
         }
     }
 }

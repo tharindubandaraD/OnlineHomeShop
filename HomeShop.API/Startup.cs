@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using HomeShop.API.Data;
 using HomeShop.API.Helpers;
@@ -12,18 +8,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using HomeShop.API.Business;
 using HomeShop.API.Data.CategoryRepository;
 using HomeShop.API.Data.BrandRepository;
 using HomeShop.API.Business._Category;
+using HomeShop.API.Data.OrderProductRepository;
+using HomeShop.API.Business._OrderProduct;
+using HomeShop.API.Data.OrderRepository;
+using HomeShop.API.Business._Order;
 
 namespace HomeShop.API
 {
@@ -59,6 +56,10 @@ namespace HomeShop.API
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();
             services.AddScoped<IBrandRepository,BrandRepository>();
+            services.AddScoped<IOrderProductRepository,OrderProductRepository>();
+            services.AddScoped<IOrderProductBusinessLayer,OrderProductBusinessLayer>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderBusinessLayer,OrderBusinessLayer>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer( options => {
