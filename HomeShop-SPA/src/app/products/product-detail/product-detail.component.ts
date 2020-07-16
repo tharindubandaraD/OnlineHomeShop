@@ -1,3 +1,6 @@
+import { AuthService } from './../../_services/auth.service';
+import { Order } from './../../_models/order';
+import { CartService } from './../../_services/_cartservice/cart.service';
 import { Category } from './../../_models/category';
 import { AlertifyService } from './../../_services/alertify.service';
 import { ProductService } from 'src/app/_services/product.service';
@@ -20,7 +23,8 @@ export class ProductDetailComponent implements OnInit {
   cartComponentLoad = false;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private alertify: AlertifyService,
+              private route: ActivatedRoute, private cartService: CartService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -54,5 +58,23 @@ export class ProductDetailComponent implements OnInit {
       });
     }
     return imageUrls;
+  }
+
+  addToCart(){
+    this.getValues();
+    // tslint:disable-next-line: max-line-length
+    const ordera: Order = { userId: this.authService.decodeToken.nameid, price: this.product.price, quantity: 1, orderStatus: false, orderproductId: 1};
+    this.cartService.postOrder(ordera).subscribe(() => {
+        // tslint:disable-next-line: quotemark
+         this.alertify.success("order placed");
+      }, error => {
+         this.alertify.error(error);
+         console.log(error());
+      });
+    console.log(ordera);
+  }
+
+  getValues(){
+      // tslint:disable-next-line: prefer-const
   }
 }

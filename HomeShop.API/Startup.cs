@@ -55,9 +55,9 @@ namespace HomeShop.API
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();
-            services.AddScoped<IBrandRepository,BrandRepository>();
-            services.AddScoped<IOrderProductRepository,OrderProductRepository>();
+            services.AddScoped<IBrandRepository,BrandRepository>();            
             services.AddScoped<IOrderProductBusinessLayer,OrderProductBusinessLayer>();
+            services.AddScoped<IOrderProductRepository,OrderProductRepository>();        
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderBusinessLayer,OrderBusinessLayer>();
 
