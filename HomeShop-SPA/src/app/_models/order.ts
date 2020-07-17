@@ -4,4 +4,5 @@ export interface Order {
     orderStatus: boolean;
     quantity: number;
     orderproductId: number;
+    productId: number;
 }

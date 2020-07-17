@@ -18,7 +18,6 @@ using HomeShop.API.Data.CategoryRepository;
 using HomeShop.API.Data.BrandRepository;
 using HomeShop.API.Business._Category;
 using HomeShop.API.Data.OrderProductRepository;
-using HomeShop.API.Business._OrderProduct;
 using HomeShop.API.Data.OrderRepository;
 using HomeShop.API.Business._Order;
 
@@ -56,7 +55,6 @@ namespace HomeShop.API
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();
             services.AddScoped<IBrandRepository,BrandRepository>();            
-            services.AddScoped<IOrderProductBusinessLayer,OrderProductBusinessLayer>();
             services.AddScoped<IOrderProductRepository,OrderProductRepository>();        
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderBusinessLayer,OrderBusinessLayer>();

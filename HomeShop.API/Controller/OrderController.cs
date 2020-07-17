@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using HomeShop.API.Business._Order;
-using HomeShop.API.Dtos.OrderDto;
+using HomeShop.API.Dtos.CommonDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +18,9 @@ namespace HomeShop.API.Controller
 
         }
         [HttpPost]
-        public async Task<IActionResult> PostOrder(OrderDto orderDto)
+        public async Task<IActionResult> PostOrder(CommonDto commonDto)
         {
-           var order =  await  _orderBusinessLayer.addOrder(orderDto);
+           var order =  await  _orderBusinessLayer.addOrder(commonDto);
            return Ok(order);
         }
     }

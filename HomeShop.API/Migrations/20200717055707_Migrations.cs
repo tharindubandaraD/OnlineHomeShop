@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HomeShop.API.Migrations
 {
-    public partial class UpdatedMssql : Migration
+    public partial class Migrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,20 +90,21 @@ namespace HomeShop.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderProducts",
+                name: "Orders",
                 columns: table => new
                 {
-                    OrderproductId = table.Column<int>(nullable: false)
+                    OrderID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(nullable: false)
+                    orderStatus = table.Column<bool>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderProducts", x => x.OrderproductId);
+                    table.PrimaryKey("PK_Orders", x => x.OrderID);
                     table.ForeignKey(
-                        name: "FK_OrderProducts_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Orders_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -133,43 +134,42 @@ namespace HomeShop.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "OrderProducts",
                 columns: table => new
                 {
-                    OrderID = table.Column<int>(nullable: false)
+                    OrderproductId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(nullable: false),
                     Price = table.Column<double>(nullable: false),
-                    orderStatus = table.Column<bool>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
-                    OrderProductId = table.Column<int>(nullable: false)
+                    ProductId = table.Column<int>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderID);
+                    table.PrimaryKey("PK_OrderProducts", x => x.OrderproductId);
                     table.ForeignKey(
-                        name: "FK_Orders_OrderProducts_OrderProductId",
-                        column: x => x.OrderProductId,
-                        principalTable: "OrderProducts",
-                        principalColumn: "OrderproductId",
+                        name: "FK_OrderProducts_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
+                        name: "FK_OrderProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderProducts_OrderId",
+                table: "OrderProducts",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderProducts_ProductId",
                 table: "OrderProducts",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_OrderProductId",
-                table: "Orders",
-                column: "OrderProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserID",
@@ -195,19 +195,19 @@ namespace HomeShop.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "OrderProducts");
 
             migrationBuilder.DropTable(
                 name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "OrderProducts");
-
-            migrationBuilder.DropTable(
-                name: "Users");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Brands");

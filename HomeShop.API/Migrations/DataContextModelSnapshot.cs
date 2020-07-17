@@ -56,15 +56,6 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("OrderProductId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
@@ -72,8 +63,6 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("OrderID");
-
-                    b.HasIndex("OrderProductId");
 
                     b.HasIndex("UserID");
 
@@ -87,10 +76,21 @@ namespace HomeShop.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderproductId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -219,12 +219,6 @@ namespace HomeShop.API.Migrations
 
             modelBuilder.Entity("HomeShop.API.Model.Order", b =>
                 {
-                    b.HasOne("HomeShop.API.Model.OrderProduct", "OrderProducts")
-                        .WithMany("Orders")
-                        .HasForeignKey("OrderProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HomeShop.API.Model.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserID")
@@ -234,6 +228,12 @@ namespace HomeShop.API.Migrations
 
             modelBuilder.Entity("HomeShop.API.Model.OrderProduct", b =>
                 {
+                    b.HasOne("HomeShop.API.Model.Order", "Order")
+                        .WithMany("OrderProduct")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HomeShop.API.Model.Product", "Product")
                         .WithMany("OrderProducts")
                         .HasForeignKey("ProductId")
