@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using HomeShop.API.Data.OrderProductRepository;
@@ -62,6 +63,12 @@ namespace HomeShop.API.Business._Order
             
                     return orderResult;
             }
+        }
+
+        public async Task<IEnumerable<GetOrderDetailDto>> getOrder(int userId)
+        {
+            IEnumerable<GetOrderDetailDto> getOrderDetail = await _orderRepository.GetOrder(userId);
+            return getOrderDetail;
         }
     }
 }

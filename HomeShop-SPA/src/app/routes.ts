@@ -7,6 +7,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { HomeComponent } from './home/home.component';
 import {Routes} from '@angular/router';
 import { CategoryListResolver } from './_resolvers/category-list.resolver';
+import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
 
 export const appRouters: Routes = [
     {path: '', component: HomeComponent},
@@ -19,7 +20,7 @@ export const appRouters: Routes = [
 
             {path: 'products/:id', component: ProductDetailComponent,  resolve: {product: ProductDetailResolver}},
 
-            {path: 'cart', component: CartComponent },
+            {path: 'cart', component: CartComponent, resolve: {cart: CartDetailResolver}},
 
             {path: 'message', component: MessagesComponent},
 

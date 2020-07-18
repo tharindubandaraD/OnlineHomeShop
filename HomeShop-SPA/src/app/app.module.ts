@@ -28,6 +28,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
 import { Product_cardComponent } from './products/product_card/product_card.component';
+import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -70,7 +71,8 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AuthGuard,
       ProductDetailResolver,
-      CategoryListResolver
+      CategoryListResolver,
+      CartDetailResolver
    ],
    bootstrap: [
       AppComponent

@@ -61,21 +61,18 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(){
-    this.getValues();
+
     // tslint:disable-next-line: max-line-length
-    const ordera: Order = { userId: this.authService.decodeToken.nameid, price: this.product.price, quantity: 1, orderStatus: false, orderproductId: 1, productId: this.product.id};
-    // this.cartService.postOrder(ordera).subscribe(() => {
-    //     // tslint:disable-next-line: quotemark
+    const ordera: Order = { userId: this.authService.decodeToken.nameid, price: this.product.price, quantity: 1, productId: this.product.id};
+    this.cartService.postOrder(ordera).subscribe(() => {
+         // tslint:disable-next-line: quotemark
 
-    //      this.alertify.success("order placed");
-    //   }, error => {
-    //      this.alertify.error(error);
-    //      console.log(error());
-    //   });
+          // tslint:disable-next-line: quotemark
+          this.alertify.success("order placed");
+       }, error => {
+          this.alertify.error(error);
+          console.log(error());
+       });
     console.log(ordera);
-  }
-
-  getValues(){
-      // tslint:disable-next-line: prefer-const
   }
 }

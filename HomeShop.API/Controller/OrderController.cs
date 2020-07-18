@@ -23,5 +23,12 @@ namespace HomeShop.API.Controller
            var order =  await  _orderBusinessLayer.addOrder(commonDto);
            return Ok(order);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            var getorderdetails = await _orderBusinessLayer.getOrder(id);
+            return Ok(getorderdetails);
+        }
     }
 }
