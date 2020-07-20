@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using HomeShop.API.Business._Order;
 using HomeShop.API.Dtos.CommonDto;
+using HomeShop.API.Dtos.OrderDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,5 +31,12 @@ namespace HomeShop.API.Controller
             var getorderdetails = await _orderBusinessLayer.getOrder(id);
             return Ok(getorderdetails);
         }
+
+         [HttpDelete]
+         public async Task<IActionResult> DeleteOrder(GetOrderDetailDto getOrderDetailDto)
+         {
+            await _orderBusinessLayer.deleteOrder(getOrderDetailDto);
+            return Ok();
+         }
     }
 }

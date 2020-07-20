@@ -26,7 +26,7 @@
                               <td>
                                   <div class="price-wrap"> <var class="price">{{cartitems.price | currency:'Rs: '}}</var> <small class="text-muted"> discount: {{cartitems.discount}}%  </small> </div>
                               </td>
-                              <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"></a> <a href="" class="btn btn-primary" data-abc="true"> Remove</a> </td>
+                              <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"></a> <a  class="btn btn-primary" data-abc="true" (click)="removeItem(cartitems)"> Remove</a> </td>
                           </tr>         
                       </tbody>
                   </table>

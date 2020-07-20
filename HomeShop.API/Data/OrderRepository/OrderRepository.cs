@@ -27,7 +27,7 @@ namespace HomeShop.API.Data.OrderRepository
         {   
             Order order = await _dataContext.Orders.Where(s => s.orderStatus == false && s.UserID == userId).FirstOrDefaultAsync();
             return order;    
-        }
+        }       
 
         public async Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId)
         {
@@ -38,9 +38,10 @@ namespace HomeShop.API.Data.OrderRepository
                                     join photo in _dataContext.Photos on product.Id equals photo.ProductId
                                     where photo.IsMain == true  && Order.orderStatus == false&& Order.UserID == userId 
                                     select new GetOrderDetailDto()
-                                    {
+                                    {                                        
                                         OrderId = Order.OrderID,
                                         UserId = Order.UserID,
+                                        OrderProductId = OrderProduct.OrderproductId,
                                         ProductId = OrderProduct.ProductId,
                                         Quantity = OrderProduct.Quantity,
                                         Price = OrderProduct.Price,
@@ -54,5 +55,6 @@ namespace HomeShop.API.Data.OrderRepository
                 return orderDetails;
             
         }
+     
     }
 }

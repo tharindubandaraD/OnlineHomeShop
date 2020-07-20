@@ -17,5 +17,14 @@ namespace HomeShop.API.Data.OrderProductRepository
             await _dataContext.SaveChangesAsync();
             return orderProduct;
         }
+
+      public void Delete<T>(T entity) where T : class
+        {
+           _dataContext.Remove(entity);
+        }
+        public async Task<bool> SaveAll()
+        {
+            return await _dataContext.SaveChangesAsync() > 0;
+        }
     }
 }

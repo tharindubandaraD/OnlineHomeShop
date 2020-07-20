@@ -51,4 +51,8 @@ export class CartComponent implements OnInit {
     return this.gettotal() - this.getdiscount();
   }
 
+  removeItem(removeItem: Cart){
+    console.log(removeItem);
+  }
+
 }
