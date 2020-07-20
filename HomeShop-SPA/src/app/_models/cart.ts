@@ -1,6 +1,6 @@
 export interface Cart {
     orderId: number;
-    orderproductId: number;
+    orderProductId: number;
     userId: number;
     productId: number;
     quantity: number;

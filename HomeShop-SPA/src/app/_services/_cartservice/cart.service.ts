@@ -1,3 +1,4 @@
+import { Order } from './../../_models/order';
 import { Cart } from './../../_models/cart';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -19,6 +20,10 @@ postOrder(model: any){
 
 getOrder(id): Observable<Cart[]>{
    return this.http.get<Cart[]>(this.baseUrl + 'order/' + id);
+}
+
+deleteOrderItem(id: number){
+  return this.http.delete(this.baseUrl + 'order/' + id);
 }
 
 }

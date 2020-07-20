@@ -32,10 +32,10 @@ namespace HomeShop.API.Controller
             return Ok(getorderdetails);
         }
 
-         [HttpDelete]
-         public async Task<IActionResult> DeleteOrder(GetOrderDetailDto getOrderDetailDto)
+         [HttpDelete("{id}")]
+         public async Task<IActionResult> DeleteOrder(int id)
          {
-            await _orderBusinessLayer.deleteOrder(getOrderDetailDto);
+            await _orderBusinessLayer.deleteOrder(id);
             return Ok();
          }
     }

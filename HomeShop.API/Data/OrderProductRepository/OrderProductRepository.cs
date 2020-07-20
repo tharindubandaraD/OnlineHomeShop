@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using HomeShop.API.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeShop.API.Data.OrderProductRepository
 {
@@ -17,11 +19,18 @@ namespace HomeShop.API.Data.OrderProductRepository
             await _dataContext.SaveChangesAsync();
             return orderProduct;
         }
+        
 
       public void Delete<T>(T entity) where T : class
         {
            _dataContext.Remove(entity);
         }
+
+        public async Task<OrderProduct> GetOrderProduct(int i)
+        {
+            return await _dataContext.OrderProducts.FirstOrDefaultAsync(x => x.OrderproductId == i);
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _dataContext.SaveChangesAsync() > 0;

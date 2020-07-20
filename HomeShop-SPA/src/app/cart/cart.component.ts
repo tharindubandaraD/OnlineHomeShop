@@ -1,7 +1,9 @@
+import { CartService } from './../_services/_cartservice/cart.service';
 import { Cart } from './../_models/cart';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Component, OnInit } from '@angular/core';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +15,7 @@ export class CartComponent implements OnInit {
   cart: Cart[];
   quantity: number[];
 
-  constructor(private alertify: AlertifyService, private router: ActivatedRoute) { }
+  constructor(private alertify: AlertifyService, private cartservice: CartService, private router: ActivatedRoute) { }
 
   ngOnInit() {
      this.router.data.subscribe( data => {
@@ -50,9 +52,16 @@ export class CartComponent implements OnInit {
   getgrandtotal(){
     return this.gettotal() - this.getdiscount();
   }
-
-  removeItem(removeItem: Cart){
-    console.log(removeItem);
+  removeItem(Item: Cart){
+    console.log(Item.orderProductId);
+    this.alertify.confirm('Are you sure do you want to remove this product?', () => {
+      this.cartservice.deleteOrderItem(Item.orderProductId).subscribe(() => {
+        this.cart.splice(this.cart.findIndex(p => p.orderProductId === Item.orderProductId), 1);
+        this.alertify.success('Product removed from cart');
+      }, error => {
+        this.alertify.error('Failed to remove item from cart');
+      });
+    });
   }
 
 }

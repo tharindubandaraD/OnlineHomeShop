@@ -7,6 +7,7 @@ namespace HomeShop.API.Data.OrderProductRepository
     {
          Task<OrderProduct> addOrderProduct(OrderProduct orderProduct);
         void Delete<T>(T entity) where T: class;
-         Task<bool> SaveAll();
+         Task<bool> SaveAll();         
+         Task<OrderProduct> GetOrderProduct(int i); 
     }
 }

@@ -9,7 +9,7 @@ namespace HomeShop.API.Data.OrderRepository
     {
          Task<Order> addOrder(Order order);
          Task<Order> CheckOrderStatus(int OrderId);
-         Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId);        
+         Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId);       
 
     }
 }

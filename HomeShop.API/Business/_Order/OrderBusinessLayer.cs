@@ -65,17 +65,15 @@ namespace HomeShop.API.Business._Order
             }
         }
 
-        public async Task<bool> deleteOrder(GetOrderDetailDto getOrderDetailDto)
+        public async Task<bool> deleteOrder(int id)
         {
-              OrderProduct orderProduct = new OrderProduct{
-                  OrderproductId = getOrderDetailDto.OrderProductId,
-                  Quantity = getOrderDetailDto.Quantity,
-                  Price = getOrderDetailDto.Price,
-                  ProductId = getOrderDetailDto.ProductId,
-                  OrderId = getOrderDetailDto.OrderId
-              };
-               _orderProductRepository.Delete(getOrderDetailDto);
-               return await _orderProductRepository.SaveAll();
+            OrderProduct orderProduct = await _orderProductRepository.GetOrderProduct(id);
+
+            if(orderProduct == null)
+                return false;
+                        
+            _orderProductRepository.Delete(orderProduct);
+            return await _orderProductRepository.SaveAll();
         }
 
         public async Task<IEnumerable<GetOrderDetailDto>> getOrder(int userId)
