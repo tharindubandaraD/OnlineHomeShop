@@ -1,7 +1,7 @@
+import { Cart } from './../_models/cart';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Component, OnInit } from '@angular/core';
-import { Cart } from '../_models/cart';
 
 @Component({
   selector: 'app-cart',
@@ -11,6 +11,7 @@ import { Cart } from '../_models/cart';
 export class CartComponent implements OnInit {
 
   cart: Cart[];
+  quantity: number[];
 
   constructor(private alertify: AlertifyService, private router: ActivatedRoute) { }
 
@@ -19,18 +20,35 @@ export class CartComponent implements OnInit {
         // tslint:disable-next-line: no-string-literal
         this.cart = data['cart'];
      });
+     console.log(this.cart);
   }
 
-  // getCart(){
-  //   this.userId = this.authservice.decodeToken.nameid;
-  //   this.cartservice.getOrder(this.userId).subscribe((cart: Cart[]) =>
-  //   {
-  //     this.cart = cart;
-  //     console.log(cart);
-  //   },
-  //   error => {
-  //     this.alertify.error(error);
-  //   });
-  // }
+  gettotal(){
+    let total = 0;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.cart.length; i++){
+        if (this.cart[i].price) {
+          total += this.cart[i].price * this.cart[i].quantity;
+        }
+      }
+    return total;
+  }
+
+  getdiscount(){
+    let discount = 0;
+    let amount = 0;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.cart.length; i++){
+        if (this.cart[i].discount > 0) {
+          amount = this.cart[i].discount / 100;
+          discount += (this.cart[i].price * this.cart[i].quantity) * amount;
+        }
+      }
+    return discount;
+  }
+
+  getgrandtotal(){
+    return this.gettotal() - this.getdiscount();
+  }
 
 }

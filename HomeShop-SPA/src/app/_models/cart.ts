@@ -3,9 +3,9 @@ export interface Cart {
     userId: number;
     productId: number;
     quantity: number;
+    itemLeft: number;
     price: number;
     productName: string;
     discount: number;
-    itemleft: number;
     url: string;
 }
