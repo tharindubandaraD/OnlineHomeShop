@@ -62,6 +62,7 @@ export class CartComponent implements OnInit {
         this.alertify.error('Failed to remove item from cart');
       });
     });
+
   }
 
 }

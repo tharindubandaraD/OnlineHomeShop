@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeShop.API.Model;
@@ -19,9 +20,8 @@ namespace HomeShop.API.Data.OrderProductRepository
             await _dataContext.SaveChangesAsync();
             return orderProduct;
         }
-        
 
-      public void Delete<T>(T entity) where T : class
+        public void Delete<T>(T entity) where T : class
         {
            _dataContext.Remove(entity);
         }
@@ -34,6 +34,11 @@ namespace HomeShop.API.Data.OrderProductRepository
         public async Task<bool> SaveAll()
         {
             return await _dataContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<OrderProduct> GetProduct(int orderId,int productId)
+        {
+               return   await  _dataContext.OrderProducts.FirstOrDefaultAsync(x => x.OrderId == orderId && x.ProductId == productId);
         }
     }
 }

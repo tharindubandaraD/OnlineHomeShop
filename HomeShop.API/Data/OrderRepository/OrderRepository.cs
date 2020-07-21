@@ -36,7 +36,7 @@ namespace HomeShop.API.Data.OrderRepository
                                     Order.OrderID equals OrderProduct.OrderId join 
                                     product in _dataContext.Products on OrderProduct.ProductId equals product.Id
                                     join photo in _dataContext.Photos on product.Id equals photo.ProductId
-                                    where photo.IsMain == true  && Order.orderStatus == false&& Order.UserID == userId 
+                                    where photo.IsMain == true  && Order.orderStatus == false && Order.UserID == userId 
                                     select new GetOrderDetailDto()
                                     {                                        
                                         OrderId = Order.OrderID,

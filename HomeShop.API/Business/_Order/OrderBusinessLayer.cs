@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -45,25 +46,48 @@ namespace HomeShop.API.Business._Order
 
                     OrderProduct orderProduct = _mapper.Map<OrderProduct>(orderProductobject);
                     var orderProductRepository = await _orderProductRepository.addOrderProduct(orderProduct);
-            
+                
 
                     return orderBusiness;
             }
             else
             {
-                    OrderProductDto orderProductobject = new OrderProductDto{
+                OrderProduct orderProductFromRepo = await _orderProductRepository.GetProduct(orderResult.OrderID, commonDto.ProductId);
+                if(orderProductFromRepo != null)
+                {
+                       OrderProductDto orderProductDto = new OrderProductDto{
+                            OrderProductId = orderProductFromRepo.OrderproductId,
+                            ProductId = commonDto.ProductId,
+                            OrderId = orderResult.OrderID,
+                            Price = commonDto.Price,
+                            Quantity = commonDto.Quantity + orderProductFromRepo.Quantity
+                    };
+
+                    _mapper.Map(orderProductDto,orderProductFromRepo);
+
+                   if(await _orderProductRepository.SaveAll())
+                         return orderResult;
+
+                    throw new Exception($"Updating failed");
+                }
+                else
+                {
+
+                 OrderProductDto orderProductobject = new OrderProductDto{
                             ProductId = commonDto.ProductId,
                             OrderId = orderResult.OrderID,
                             Price = commonDto.Price,
                             Quantity = commonDto.Quantity
                     };
 
-                    OrderProduct orderProduct = _mapper.Map<OrderProduct>(orderProductobject);
-                    var orderProductRepository = await _orderProductRepository.addOrderProduct(orderProduct);
+                    OrderProduct orderProductItem = _mapper.Map<OrderProduct>(orderProductobject);
+                    var orderProductRepository = await _orderProductRepository.addOrderProduct(orderProductItem);
             
                     return orderResult;
+                }
             }
-        }
+         }
+        
 
         public async Task<bool> deleteOrder(int id)
         {

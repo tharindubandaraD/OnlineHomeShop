@@ -68,7 +68,7 @@ export class ProductDetailComponent implements OnInit {
          // tslint:disable-next-line: quotemark
 
           // tslint:disable-next-line: quotemark
-          this.alertify.success("order placed");
+          this.alertify.success("item added");
        }, error => {
           this.alertify.error(error);
           console.log(error());
