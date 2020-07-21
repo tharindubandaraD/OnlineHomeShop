@@ -29,6 +29,8 @@ namespace HomeShop.API.Helpers
 
           CreateMap<OrderProductDto, OrderProduct>();
 
+          CreateMap<UserForRegisterDto, User>();
+
         }
     }
 }

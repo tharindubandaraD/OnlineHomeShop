@@ -25,25 +25,13 @@ export class RegisterComponent implements OnInit {
               private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
-    // this.registerForm = new FormGroup({
-    //   username: new FormControl('Hell', Validators.required),
-    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-    //   confirmPassword: new FormControl('', Validators.required)
-    // }, this.passwordMatchValidator);
+
     this.bsConfig = {
       containerClass: 'theme-red'
     },
     this.createRegisterForm();
   }
 
-  // register() {
-  //   // this.authservice.register(this.registermodel).subscribe(() => {
-  //   //     this.alertify.success('register successfully');
-  //   // }, error => {
-  //   //   this.alertify.error(error);
-  //   // });
-  //   console.log(this.registerForm.value);
-  // }
   createRegisterForm() {
     this.registerForm = this.fb.group({
       gender: ['male'],

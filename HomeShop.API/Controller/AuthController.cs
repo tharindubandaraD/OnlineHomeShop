@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
+using AutoMapper;
 using HomeShop.API.Business;
 using HomeShop.API.Dtos;
+using HomeShop.API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -14,8 +16,8 @@ namespace HomeShop.API.Controller
     {
         private readonly IAuthBusinessLayer _authbusiness;
         private readonly IConfiguration _config;
-        public AuthController(IConfiguration config,IAuthBusinessLayer authBusinessLayer)
-        {
+        public AuthController(IConfiguration config, IAuthBusinessLayer authBusinessLayer)
+        {           
             _config = config;
             _authbusiness = authBusinessLayer;
         }
@@ -25,10 +27,10 @@ namespace HomeShop.API.Controller
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDtos)
         {
             //validate request 
-            if(! await _authbusiness.Register(userForRegisterDtos))
-                    return BadRequest("User already exisits");
+            if (!await _authbusiness.Register(userForRegisterDtos))
+                return BadRequest("User already exisits");
 
-            return StatusCode(201);
+            return Ok();
 
         }
 
@@ -37,12 +39,12 @@ namespace HomeShop.API.Controller
         {
             var userForLogin = await _authbusiness.Login(userForLoginDtos.Username.ToLower(), userForLoginDtos.Password);
 
-            if(userForLogin.Token == null)
+            if (userForLogin.Token == null)
                 return Unauthorized();
 
             return Ok(new
             {
-                token = userForLogin.Token               
+                token = userForLogin.Token
             });
 
         }

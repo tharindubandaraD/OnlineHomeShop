@@ -22,7 +22,6 @@ export class CartComponent implements OnInit {
         // tslint:disable-next-line: no-string-literal
         this.cart = data['cart'];
      });
-     console.log(this.cart);
   }
 
   gettotal(){
@@ -52,6 +51,7 @@ export class CartComponent implements OnInit {
   getgrandtotal(){
     return this.gettotal() - this.getdiscount();
   }
+
   removeItem(Item: Cart){
     console.log(Item.orderProductId);
     this.alertify.confirm('Are you sure do you want to remove this product?', () => {
@@ -63,6 +63,10 @@ export class CartComponent implements OnInit {
       });
     });
 
+  }
+
+  makePurchase(cartobject: Cart[]){
+    console.log(cartobject);
   }
 
 }

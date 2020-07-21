@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
 using System.Collections;
 using HomeShop.API.Model;
+using AutoMapper;
 
 namespace HomeShop.API.Business
 {
@@ -16,8 +17,10 @@ namespace HomeShop.API.Business
     {
         private readonly IAuthRepository _authRepository;
         private readonly IConfiguration _configuration;
-        public AuthBusinessLayer(IAuthRepository authRepository, IConfiguration configuration)
+        private readonly IMapper _mapper;
+        public AuthBusinessLayer(IAuthRepository authRepository, IConfiguration configuration, IMapper mapper)
         {
+            _mapper = mapper;
             _configuration = configuration;
             _authRepository = authRepository;
 
@@ -54,7 +57,7 @@ namespace HomeShop.API.Business
 
             return new UserForLoginDtos
             {
-               Token = serializetoken
+                Token = serializetoken
             };
         }
 
@@ -62,19 +65,17 @@ namespace HomeShop.API.Business
         {
             userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
 
-            if(await _authRepository.UserExists(userForRegisterDto.UserName))
+            if (await _authRepository.UserExists(userForRegisterDto.UserName))
                 return false;
 
-             var userToCreate = new User
-            {
-               Username = userForRegisterDto.UserName
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
+           
             var createdUser = await _authRepository.Register(userToCreate, userForRegisterDto.Password);
 
             return true;
-            
+
         }
 
-       
+
     }
 }
