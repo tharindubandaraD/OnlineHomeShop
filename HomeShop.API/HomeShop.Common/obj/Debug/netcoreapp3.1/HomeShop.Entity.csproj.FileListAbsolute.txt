@@ -1,0 +1,18 @@
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\bin\Debug\netcoreapp3.1\HomeShop.Entity.deps.json
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\bin\Debug\netcoreapp3.1\HomeShop.Entity.dll
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\bin\Debug\netcoreapp3.1\HomeShop.Entity.pdb
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.AssemblyInfoInputs.cache
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.AssemblyInfo.cs
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.csproj.CoreCompileInputs.cache
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.dll
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.pdb
+C:\Users\hash\Desktop\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.csprojAssemblyReference.cache
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\bin\Debug\netcoreapp3.1\HomeShop.Entity.deps.json
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\bin\Debug\netcoreapp3.1\HomeShop.Entity.dll
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\bin\Debug\netcoreapp3.1\HomeShop.Entity.pdb
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.csprojAssemblyReference.cache
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.AssemblyInfoInputs.cache
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.AssemblyInfo.cs
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.csproj.CoreCompileInputs.cache
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.dll
+A:\Angular\Online Shoping - Visual Studio\HomeShop\HomeShop\HomeShop.Common\obj\Debug\netcoreapp3.1\HomeShop.Entity.pdb
