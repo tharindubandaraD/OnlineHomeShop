@@ -25,11 +25,11 @@ namespace HomeShop.API.Business.Order
             if(orderResult == null)
             {
 
+                #pragma warning disable S2259 // Null pointers should not be dereferenced
                 orderResult.orderStatus = false;
+                #pragma warning restore S2259 // Null pointers should not be dereferenced
                 orderResult.UserID = commonDto.UserID;
                 
-
-                   // Order OrderToCreate = _mapper.Map<Order>(orderDto);
                     var orderBusiness = await _orderRepository.addOrder(orderResult);
 
                     OrderProductDto orderProductobject = new OrderProductDto{
@@ -39,7 +39,7 @@ namespace HomeShop.API.Business.Order
                             Quantity = commonDto.Quantity
                     };
                     
-                    var orderProductRepository = await _orderProductRepository.addOrderProduct(orderProductobject);
+                    await _orderProductRepository.addOrderProduct(orderProductobject);
             
 
                     return orderBusiness;
@@ -54,7 +54,7 @@ namespace HomeShop.API.Business.Order
                     };
 
                 
-                    var orderProductRepository = await _orderProductRepository.addOrderProduct(orderProductobject);
+                    await _orderProductRepository.addOrderProduct(orderProductobject);
             
                     return orderResult;
             }

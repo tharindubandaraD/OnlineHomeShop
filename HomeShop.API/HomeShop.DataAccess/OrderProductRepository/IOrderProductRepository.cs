@@ -5,7 +5,7 @@ namespace HomeShop.API.Data.OrderProductRepository
 {
     public interface IOrderProductRepository
     {
-         Task<OrderProductDto> addOrderProduct(OrderProductDto orderProduct);
+         Task<OrderProductDto> addOrderProduct(OrderProductDto orderProductDto);
          void Delete<T>(T entity) where T: class;
          Task<bool> SaveAll();         
          Task<OrderProductDto> GetOrderProduct(int i); 

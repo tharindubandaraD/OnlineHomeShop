@@ -16,8 +16,8 @@ namespace HomeShop.API.Data
 
        Task<IEnumerable<Product>> GetProducts();
 
-       Task<Product> GetProduct(int i);
+       Task<Product> GetProduct(int id);
 
-       Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int i);
+       Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int id);
     }
 }

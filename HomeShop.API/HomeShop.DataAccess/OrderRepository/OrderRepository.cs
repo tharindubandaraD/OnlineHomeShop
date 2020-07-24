@@ -29,7 +29,7 @@ namespace HomeShop.API.Data.OrderRepository
 
         public async Task<OrderDto> CheckOrderStatus(int userId)
         {   
-            Order order = await _dataContext.Orders.Where(s => s.orderStatus == false && s.UserID == userId).FirstOrDefaultAsync();
+            Order order = await _dataContext.Orders.Where(s => !s.orderStatus && s.UserID == userId).FirstOrDefaultAsync();
             
             OrderDto orderDto = _mapper.Map<Order, OrderDto>(order);
             
