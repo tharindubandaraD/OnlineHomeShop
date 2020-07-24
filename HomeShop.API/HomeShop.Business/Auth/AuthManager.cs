@@ -53,6 +53,8 @@ namespace HomeShop.API.Business
 
             string serializetoken = tokenHandler.WriteToken(token);
 
+            UserForLoginDtos userForLogin = _mapper.Map<UserForLoginDtos>(userFromRepo);
+
             return new UserForLoginDtos
             {
                Token = serializetoken

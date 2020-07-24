@@ -1,5 +1,6 @@
 import { AuthService } from './../../_services/auth.service';
 import { Order } from './../../_models/order';
+import { Cart } from './../../_models/cart';
 import { CartService } from './../../_services/_cartservice/cart.service';
 import { Category } from './../../_models/category';
 import { AlertifyService } from './../../_services/alertify.service';
@@ -61,18 +62,29 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(){
-
+    console.log(this.product);
+    if (this.product.items == null)
+    {
+       this.product.items = 1;
+    }
+    if (this.cartService.addToCart(this.product)) {
+          this.alertify.success(' product added to cart ');
+    }
+    else{
+          this.alertify.error(' item already added  ');
+    }
+    // tslint:disable-next-line: quotemark
     // tslint:disable-next-line: max-line-length
-    const ordera: Order = { userId: this.authService.decodeToken.nameid, price: this.product.price, quantity: 1, productId: this.product.id};
-    this.cartService.postOrder(ordera).subscribe(() => {
-         // tslint:disable-next-line: quotemark
+    // const ordera: Order = { userId: this.authService.decodeToken.nameid, price: this.product.price, quantity: 1, productId: this.product.id};
+    // this.cartService.postOrder(ordera).subscribe(() => {
+    //      // tslint:disable-next-line: quotemark
 
-          // tslint:disable-next-line: quotemark
-          this.alertify.success("item added");
-       }, error => {
-          this.alertify.error(error);
-          console.log(error());
-       });
-    console.log(ordera);
+    //       // tslint:disable-next-line: quotemark
+    //       this.alertify.success("item added");
+    //    }, error => {
+    //       this.alertify.error(error);
+    //       console.log(error());
+    //    });
+    // console.log(ordera);
   }
 }

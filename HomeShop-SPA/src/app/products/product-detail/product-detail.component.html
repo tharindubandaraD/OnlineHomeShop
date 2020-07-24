@@ -17,6 +17,9 @@
                         <strong>Items Left:</strong>
                         <p>{{product.quantity}}</p>
                     </div>
+                    <div>
+                        <input id="quantity" type="number" min="1" max="{{product.quantity}}" [(ngModel)]="product.items"  required placeholder="1" >
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="btn-group d-flex">                       

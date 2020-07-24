@@ -45,7 +45,19 @@ namespace HomeShop.API
             });
             services.AddCors();
 
+<<<<<<< .mine
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+
+
+
+=======
+          //  services.AddAutoMapper(typeof(ProductRepository).Assembly);
+          //  services.AddAutoMapper(typeof(CategoryRepository).Assembly);
+          //  services.AddAutoMapper(typeof(BrandRepository).Assembly);
+          services.AddAutoMapper(typeof(Startup));
+          
+>>>>>>> .theirs
 
 
             services.AddScoped<IAuthManager, AuthManager>();
