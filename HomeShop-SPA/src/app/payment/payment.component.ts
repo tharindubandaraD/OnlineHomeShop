@@ -14,7 +14,7 @@ export class PaymentComponent implements OnInit {
   items: Product[];
 
   constructor(private cartService: CartService) { }
- // hghh
+
   ngOnInit() {
     this.payment = this.cartService.getPaymentDetails();
     this.items = this.cartService.getItems();
