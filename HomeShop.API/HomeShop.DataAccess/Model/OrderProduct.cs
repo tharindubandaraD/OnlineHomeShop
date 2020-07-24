@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using HomeShop.DataAccess.Model;
-
 namespace HomeShop.DataAccess.Model
 {
     public class OrderProduct

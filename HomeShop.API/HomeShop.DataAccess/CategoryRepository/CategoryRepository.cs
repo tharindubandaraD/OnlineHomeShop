@@ -22,7 +22,7 @@ namespace HomeShop.API.Data.CategoryRepository
             var Categories = await  (from category in _dataContext.Categories join
                                  product in _dataContext.Products on  category.CategoryID equals product.CategoryId 
                                     join photo in _dataContext.Photos on product.Id equals photo.ProductId 
-                                    where photo.IsMain == true 
+                                    where photo.IsMain 
                                     select new CategoryForDetailDto()
                                     {
                                         CategotyId = category.CategoryID,
