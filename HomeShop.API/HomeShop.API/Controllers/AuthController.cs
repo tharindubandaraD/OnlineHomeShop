@@ -34,6 +34,9 @@ namespace HomeShop.API.Controller
 
         }
 
+        /// <summary>Logins the specified user for login dtos.</summary>
+        /// <param name="userForLoginDtos">The user for login dtos.</param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDtos userForLoginDtos)
         {

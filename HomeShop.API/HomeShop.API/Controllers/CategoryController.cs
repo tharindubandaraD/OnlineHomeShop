@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
 using HomeShop.API.Business.Category;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HomeShop.API.Controller
 {
@@ -9,12 +9,14 @@ namespace HomeShop.API.Controller
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
-    {       
+    {
         private readonly ICategoryManager _categoryBusinessLayer;
         public CategoryController(ICategoryManager categoryBusinessLayer)
         {
-            _categoryBusinessLayer = categoryBusinessLayer;           
+            _categoryBusinessLayer = categoryBusinessLayer;
         }
+        /// <summary>Gets the categorties.</summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> getCategorties()
         {

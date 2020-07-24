@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace HomeShop.DataAccess.Model {
-    public class User {
+namespace HomeShop.DataAccess.Model
+{
+    public class User
+    {
 
         public int Id { get; set; }
 

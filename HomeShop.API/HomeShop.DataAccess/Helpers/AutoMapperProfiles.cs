@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HomeShop.Entity.Dtos;
 using HomeShop.DataAccess.Model;
+using HomeShop.Entity.Dtos;
 using System.Linq;
 
 namespace HomeShop.DataAccess.Helpers
@@ -23,7 +23,7 @@ namespace HomeShop.DataAccess.Helpers
             CreateMap<Category, CategoryForDetailDto>();
 
             CreateMap<Brand, BrandforDetailDto>();
-             
+
             CreateMap<OrderDto, Order>().ReverseMap();
 
             CreateMap<OrderProductDto, OrderProduct>();

@@ -1,13 +1,13 @@
-using System.Threading.Tasks;
 using HomeShop.Entity.Dtos;
+using System.Threading.Tasks;
 
 namespace HomeShop.API.Data.OrderProductRepository
 {
     public interface IOrderProductRepository
     {
-         Task<OrderProductDto> addOrderProduct(OrderProductDto orderProductDto);
-         void Delete<T>(T entity) where T: class;
-         Task<bool> SaveAll();         
-         Task<OrderProductDto> GetOrderProduct(int i); 
+        Task<OrderProductDto> addOrderProduct(OrderProductDto orderProductDto);
+        void Delete<T>(T entity) where T : class;
+        Task<bool> SaveAll();
+        Task<OrderProductDto> GetOrderProduct(int i);
     }
 }

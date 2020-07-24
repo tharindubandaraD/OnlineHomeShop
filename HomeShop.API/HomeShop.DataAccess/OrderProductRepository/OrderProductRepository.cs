@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
 using AutoMapper;
-using HomeShop.Entity.Dtos;
 using HomeShop.DataAccess.Model;
+using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace HomeShop.API.Data.OrderProductRepository
 {
@@ -12,7 +12,7 @@ namespace HomeShop.API.Data.OrderProductRepository
 
         private readonly IMapper _mapper;
 
-        public OrderProductRepository(DataContext dataContext,IMapper mapper)
+        public OrderProductRepository(DataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
@@ -24,11 +24,11 @@ namespace HomeShop.API.Data.OrderProductRepository
             await _dataContext.SaveChangesAsync();
             return orderProductDto;
         }
-        
 
-      public void Delete<T>(T entity) where T : class
+
+        public void Delete<T>(T entity) where T : class
         {
-           _dataContext.Remove(entity);
+            _dataContext.Remove(entity);
         }
 
         public async Task<OrderProductDto> GetOrderProduct(int i)

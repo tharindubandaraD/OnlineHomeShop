@@ -4,7 +4,7 @@ namespace HomeShop.Entity.Dtos
     {
         public int OrderId { get; set; }
         public int OrderProductId { get; set; }
-        public int UserId { get; set; }       
+        public int UserId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public int ItemLeft { get; set; }

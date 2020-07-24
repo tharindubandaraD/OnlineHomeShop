@@ -18,10 +18,10 @@ namespace HomeShop.Entity.Dtos
         public double Price { get; set; }
 
         public double Discount { get; set; }
-        
-        public string  PhotoUrl { get; set; }
 
-        public  ICollection<PhotosForDetailDto> Photos { get; set; }    
+        public string PhotoUrl { get; set; }
+
+        public ICollection<PhotosForDetailDto> Photos { get; set; }
 
     }
 }

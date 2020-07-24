@@ -14,7 +14,7 @@ namespace HomeShop.DataAccess.Model
 
         public double Price { get; set; }
 
-        public double Discount { get; set; }       
+        public double Discount { get; set; }
 
         public ICollection<Photo> Photos { get; set; }
 
@@ -27,7 +27,7 @@ namespace HomeShop.DataAccess.Model
         public Brand Brand { get; set; }
 
         public int BrandId { get; set; }
-        
-   
+
+
     }
 }

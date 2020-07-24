@@ -1,9 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
-using HomeShop.API.Data;
 using HomeShop.API.Data.CategoryRepository;
 using HomeShop.Entity.Dtos;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HomeShop.API.Business.Category
 {
@@ -17,9 +16,11 @@ namespace HomeShop.API.Business.Category
             _categoryRepository = categoryRepository;
 
         }
+        /// <summary>Gets the category.</summary>
+        /// <returns></returns>
         async Task<IEnumerable<CategoryForDetailDto>> ICategoryManager.GetCategory()
         {
-            var categories = await  _categoryRepository.GetCategory();
+            var categories = await _categoryRepository.GetCategory();
             var mapcategories = _mapper.Map<IEnumerable<CategoryForDetailDto>>(categories);
             return mapcategories;
         }

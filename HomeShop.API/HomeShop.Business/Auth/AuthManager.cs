@@ -1,13 +1,12 @@
+using HomeShop.API.Data;
+using HomeShop.Entity.Dtos;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.Extensions.Configuration;
 using System.Text;
-using HomeShop.API.Data;
-using HomeShop.Entity.Dtos;
-using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
-using System.Collections;
 
 namespace HomeShop.API.Business
 {
@@ -21,13 +20,16 @@ namespace HomeShop.API.Business
             _authRepository = authRepository;
 
         }
-        //get user
+
+        /// <summary>Logins the specified username.</summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public async Task<UserForLoginDtos> Login(string username, string password)
         {
             var userFromRepo = await _authRepository.Login(username.ToLower(), password);
 
             if (userFromRepo == null)
-                //return proper status code
                 return null;
 
             var claims = new[]
@@ -55,23 +57,26 @@ namespace HomeShop.API.Business
 
             return new UserForLoginDtos
             {
-               Token = serializetoken
+                Token = serializetoken
             };
         }
 
+        /// <summary>Registers the specified user for register dto.</summary>
+        /// <param name="userForRegisterDto">The user for register dto.</param>
+        /// <returns></returns>
         public async Task<bool> Register(UserForRegisterDto userForRegisterDto)
         {
             userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
 
-            if(await _authRepository.UserExists(userForRegisterDto.UserName))
+            if (await _authRepository.UserExists(userForRegisterDto.UserName))
                 return false;
 
-            var createdUser = await _authRepository.Register(userForRegisterDto, userForRegisterDto.Password);
+            await _authRepository.Register(userForRegisterDto, userForRegisterDto.Password);
 
             return true;
-            
+
         }
 
-       
+
     }
 }

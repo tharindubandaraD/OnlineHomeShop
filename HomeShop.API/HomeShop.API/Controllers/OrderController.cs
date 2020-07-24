@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
 using HomeShop.API.Business.Order;
 using HomeShop.Entity.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HomeShop.API.Controller
 {
@@ -14,17 +14,23 @@ namespace HomeShop.API.Controller
         private readonly IOrderManager _orderBusinessLayer;
         public OrderController(IOrderManager orderBusinessLayer)
         {
-           _orderBusinessLayer = orderBusinessLayer;
+            _orderBusinessLayer = orderBusinessLayer;
 
         }
 
+        /// <summary>Posts the order.</summary>
+        /// <param name="commonDto">The common dto.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PostOrder(CommonDto commonDto)
         {
-           var order =  await  _orderBusinessLayer.addOrder(commonDto);
-           return Ok(order);
+            var order = await _orderBusinessLayer.addOrder(commonDto);
+            return Ok(order);
         }
 
+        /// <summary>Gets the order.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {
@@ -32,11 +38,14 @@ namespace HomeShop.API.Controller
             return Ok(getorderdetails);
         }
 
-         [HttpDelete("{id}")]
-         public async Task<IActionResult> DeleteOrder(int id)
-         {
+        /// <summary>Deletes the order.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
             await _orderBusinessLayer.deleteOrder(id);
             return Ok();
-         }
+        }
     }
 }

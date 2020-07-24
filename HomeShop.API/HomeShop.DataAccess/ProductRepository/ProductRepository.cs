@@ -1,9 +1,9 @@
+using HomeShop.DataAccess.Model;
+using HomeShop.Entity.Dtos;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeShop.Entity.Dtos;
-using HomeShop.DataAccess.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace HomeShop.API.Data
 {
@@ -43,22 +43,23 @@ namespace HomeShop.API.Data
 
         public async Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int id)
         {
-            var products = await  (from category in _context.Categories join
-                                 product in _context.Products on  category.CategoryID equals product.CategoryId
-                                  join photo in _context.Photos on  product.Id equals photo.ProductId                                    
-                                    where photo.IsMain == true &&  product.CategoryId == id
-                                    select new ProductDetailDto()
-                                    {    
-                                        Id = product.Id,                                   
-                                        CategoryId= product.CategoryId,
-                                        Quantity = product.Quantity,
-                                        Name = product.Name,
-                                        Discount = product.Discount,
-                                        Description = product.Description,
-                                        Price = product.Price,                                        
-                                        PhotoUrl = photo.Url
-                                        
-                                    }).ToListAsync();
+            var products = await (from category in _context.Categories
+                                  join
+product in _context.Products on category.CategoryID equals product.CategoryId
+                                  join photo in _context.Photos on product.Id equals photo.ProductId
+                                  where photo.IsMain && product.CategoryId == id
+                                  select new ProductDetailDto()
+                                  {
+                                      Id = product.Id,
+                                      CategoryId = product.CategoryId,
+                                      Quantity = product.Quantity,
+                                      Name = product.Name,
+                                      Discount = product.Discount,
+                                      Description = product.Description,
+                                      Price = product.Price,
+                                      PhotoUrl = photo.Url
+
+                                  }).ToListAsync();
             return products;
         }
     }

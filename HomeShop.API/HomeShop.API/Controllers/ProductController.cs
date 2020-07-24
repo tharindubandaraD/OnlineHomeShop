@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using HomeShop.API.Business;
-using HomeShop.Entity.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HomeShop.API.Controller
 {
@@ -18,14 +16,19 @@ namespace HomeShop.API.Controller
             _productBusinessLayer = productBusinessLayer;
         }
 
+        /// <summary>Gets the products.</summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
             //gaeting data from db  
-            var products = await _productBusinessLayer.GetProducts();              
+            var products = await _productBusinessLayer.GetProducts();
             return Ok(products);
         }
-        
+
+        /// <summary>Gets the product.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
@@ -33,7 +36,10 @@ namespace HomeShop.API.Controller
             return Ok(productDetail);
         }
 
-       [HttpGet("category/{id}")]
+        /// <summary>Getcategoryproducts the specified identifier.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [HttpGet("category/{id}")]
         public async Task<IActionResult> getcategoryproduct(int id)
         {
             var productbyCategory = await _productBusinessLayer.GetProductbyCategory(id);
