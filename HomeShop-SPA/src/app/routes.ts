@@ -1,3 +1,4 @@
+import { PaymentComponent } from './payment/payment.component';
 import { ProductDetailResolver } from './_resolvers/product-detail.resolver';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -23,6 +24,8 @@ export const appRouters: Routes = [
             {path: 'cart', component: CartComponent, resolve: {cart: CartDetailResolver}},
 
             {path: 'message', component: MessagesComponent},
+
+            {path: 'payment', component: PaymentComponent}
 
         ]
     },

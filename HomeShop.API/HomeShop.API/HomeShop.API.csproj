@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HomeShop.Business\HomeShop.Business.csproj" />
     <ProjectReference Include="..\HomeShop.Common\HomeShop.Entity.csproj" />
     <ProjectReference Include="..\HomeShop.DataAccess\HomeShop.DataAccess.csproj" />

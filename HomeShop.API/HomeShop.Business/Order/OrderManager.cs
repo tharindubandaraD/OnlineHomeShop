@@ -31,10 +31,7 @@ namespace HomeShop.API.Business.Order
 
             if (orderResult == null)
             {
-
-#pragma warning disable S2259 // Null pointers should not be dereferenced
-                orderResult.orderStatus = false;
-#pragma warning restore S2259 // Null pointers should not be dereferenced
+                orderResult.OrderStatus = false;
                 orderResult.UserID = commonDto.UserID;
 
                 var orderBusiness = await _orderRepository.addOrder(orderResult);

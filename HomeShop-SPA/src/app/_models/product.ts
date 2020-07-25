@@ -11,4 +11,5 @@ export interface Product {
     catergoryId?: number;
     description?: number;
     photos?: Photo[];
+    items?: number;
 }

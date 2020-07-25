@@ -29,6 +29,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { CartComponent } from './cart/cart.component';
 import { Product_cardComponent } from './products/product_card/product_card.component';
 import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
+import { PaymentComponent } from './payment/payment.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -45,7 +46,8 @@ export function tokenGetter() {
       Product_cardComponent,
       ProductDetailComponent,
       CartComponent,
-      MessagesComponent
+      MessagesComponent,
+      PaymentComponent
    ],
    imports: [
       BrowserModule,

@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <div class="row" *ngIf="cart.length != 0">
+<div class="container-fluid" *ngIf="items.length != 0">
+  <div class="row">
       <aside class="col-lg-9">
           <div class="card">
               <div class="table-responsive">
@@ -13,16 +13,16 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr *ngFor="let cartitems of cart">
+                          <tr *ngFor="let cartitems of items">
                               <td>
                                   <figure class="itemside align-items-center">
-                                      <div class="aside"><img src={{cartitems.url}} class="img-sm"></div>
-                                      <figcaption class="info"> <a class="title text-dark" data-abc="true">{{cartitems.productName}}</a>
-                                          <p class="text-muted small">Brand: JBL <br> Item Left: {{cartitems.itemLeft}} </p>
+                                      <div class="aside"><img src={{cartitems.photoUrl}} class="img-sm"></div>
+                                      <figcaption class="info"> <a class="title text-dark" data-abc="true">{{cartitems.name}}</a>
+                                          <p class="text-muted small">Brand: JBL <br> Item Left: {{cartitems.quantity}} </p>
                                       </figcaption>
                                   </figure>
                               </td>
-                              <td> <input id="quantity-{{cartitems.productId}}" type="number" min="1" max="{{cartitems.itemLeft}}" [(ngModel)]="cartitems.quantity"  required placeholder="1" >
+                              <td> <input id="quantity-{{cartitems.id}}" type="number" min="1" max="{{cartitems.quantity}}" [(ngModel)]="cartitems.items"  required placeholder="1" >
                               <td>
                                   <div class="price-wrap"> <var class="price">{{cartitems.price | currency:'Rs: '}}</var> <small class="text-muted"> discount: {{cartitems.discount}}%  </small> </div>
                               </td>
@@ -49,14 +49,12 @@
                       <dd class="text-right text-dark b ml-3"><strong>{{getgrandtotal() | currency:'Rs: '}}</strong></dd>
                   </dl>
                   <hr>
-                         <a  class="btn btn-out btn-primary btn-square btn-main" data-abc="true" (click)="makePurchase(cart)"> Make Purchase </a> 
+                         <a  class="btn btn-out btn-primary btn-square btn-main" data-abc="true" [routerLink]="['/payment']" (click)="makePurchase()"> Make Purchase </a> 
                          <a href="#" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
               </div>
           </div>
       </aside>
   </div> 
 </div>
-<div  *ngIf="cart.length == 0">    
-    <img src="https://i.pinimg.com/originals/2e/ac/fa/2eacfa305d7715bdcd86bb4956209038.png" class="center">
-</div>
+
  

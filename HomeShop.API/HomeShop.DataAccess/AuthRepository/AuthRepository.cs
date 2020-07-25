@@ -34,8 +34,7 @@ namespace HomeShop.API.Data
 
         public async Task<UserForRegisterDto> Register(UserForRegisterDto userDto, string password)
         {
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
             User user = _mapper.Map<UserForRegisterDto, User>(userDto);
 
