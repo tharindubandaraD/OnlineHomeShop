@@ -31,7 +31,9 @@ namespace HomeShop.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
+        /// <summary>Configures the services.</summary>
+        /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -74,7 +76,7 @@ namespace HomeShop.API
             {
                 x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Home Shop", Version = "v1" });
 
-                // Bearer token authentication
+                /// <summary>Bearer token authentication.</summary>
                 OpenApiSecurityScheme securityDefinition = new OpenApiSecurityScheme()
                 {
                     Name = "Bearer",
@@ -87,7 +89,7 @@ namespace HomeShop.API
 
                 x.AddSecurityDefinition("jwt_auth", securityDefinition);
 
-                // Make sure swagger UI requires a Bearer token specified
+                /// <summary>Make sure swagger UI requires a Bearer token specified</summary>
                 OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
                 {
                     Reference = new OpenApiReference()
@@ -107,7 +109,10 @@ namespace HomeShop.API
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        /// <summary>This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</summary>
+        /// <param name="app">The application.</param>
+        /// <param name="env">The env.</param>
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -117,8 +122,8 @@ namespace HomeShop.API
 
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
+            ///<summary>Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),</summary> 
+            /// <summart> specifying the Swagger JSON endpoint.</summart>
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "HomeShop API V1");

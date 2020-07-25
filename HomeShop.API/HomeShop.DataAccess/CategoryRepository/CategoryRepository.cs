@@ -13,6 +13,8 @@ namespace HomeShop.API.Data.CategoryRepository
         {
             _dataContext = dataContext;
         }
+        /// <summary>Gets the category.</summary>
+        /// <returns></returns>
         public async Task<IEnumerable<CategoryForDetailDto>> GetCategory()
         {
 

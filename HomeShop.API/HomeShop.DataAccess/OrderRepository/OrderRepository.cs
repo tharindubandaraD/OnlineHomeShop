@@ -14,11 +14,17 @@ namespace HomeShop.API.Data.OrderRepository
 
         private readonly IMapper _mapper;
 
+        /// <summary>Initializes a new instance of the <see cref="OrderRepository" /> class.</summary>
+        /// <param name="dataContext">The data context.</param>
+        /// <param name="mapper">The mapper.</param>
         public OrderRepository(DataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
         }
+        /// <summary>Adds the order.</summary>
+        /// <param name="orderDto">The order dto.</param>
+        /// <returns></returns>
         public async Task<OrderDto> AddOrder(OrderDto orderDto)
         {
             Order order = _mapper.Map<OrderDto, Order>(orderDto);
@@ -27,6 +33,9 @@ namespace HomeShop.API.Data.OrderRepository
             return orderDto;
         }
 
+        /// <summary>Checks the order status.</summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         public async Task<OrderDto> CheckOrderStatus(int userId)
         {
             Order order = await _dataContext.Orders.Where(s => !s.OrderStatus && s.UserID == userId).FirstOrDefaultAsync();
@@ -36,14 +45,17 @@ namespace HomeShop.API.Data.OrderRepository
             return orderDto;
         }
 
+        /// <summary>Gets the order.</summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId)
         {
             var orderDetails = await (from Order in _dataContext.Orders
                                       join
-  OrderProduct in _dataContext.OrderProducts on
-  Order.OrderID equals OrderProduct.OrderId
+                                         OrderProduct in _dataContext.OrderProducts on
+                                         Order.OrderID equals OrderProduct.OrderId
                                       join
-product in _dataContext.Products on OrderProduct.ProductId equals product.Id
+                                        product in _dataContext.Products on OrderProduct.ProductId equals product.Id
                                       join photo in _dataContext.Photos on product.Id equals photo.ProductId
                                       where photo.IsMain && !Order.OrderStatus && Order.UserID == userId
                                       select new GetOrderDetailDto()
@@ -64,6 +76,7 @@ product in _dataContext.Products on OrderProduct.ProductId equals product.Id
             return orderDetails;
 
         }
+
 
     }
 }
