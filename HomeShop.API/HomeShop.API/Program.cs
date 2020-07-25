@@ -4,9 +4,8 @@ using Microsoft.Extensions.Hosting;
 
 namespace HomeShop.API
 {
-    public class Program
+    public static class Program
     {
-        protected Program() { }
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

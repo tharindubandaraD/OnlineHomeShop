@@ -6,7 +6,7 @@ namespace HomeShop.API.Data.OrderRepository
 {
     public interface IOrderRepository
     {
-        Task<OrderDto> addOrder(OrderDto orderDto);
+        Task<OrderDto> AddOrder(OrderDto orderDto);
         Task<OrderDto> CheckOrderStatus(int userId);
         Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId);
 

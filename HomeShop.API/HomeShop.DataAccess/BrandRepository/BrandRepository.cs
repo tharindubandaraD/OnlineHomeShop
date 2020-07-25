@@ -13,7 +13,7 @@ namespace HomeShop.API.Data.BrandRepository
             _context = context;
         }
 
-        public async Task<IEnumerable<Brand>> getBrands()
+        public async Task<IEnumerable<Brand>> GetBrands()
         {
             var getBrands = await _context.Brands.Include(p => p.Products).ToListAsync();
             return getBrands;

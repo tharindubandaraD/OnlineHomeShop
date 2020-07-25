@@ -18,7 +18,7 @@ namespace HomeShop.API.Controller
         /// <summary>Gets the categorties.</summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> getCategorties()
+        public async Task<IActionResult> GetCategorties()
         {
             var categories = await _categoryBusinessLayer.GetCategory();
             return Ok(categories);

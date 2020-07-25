@@ -74,34 +74,41 @@ namespace HomeShop.API
             {
                 x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Home Shop", Version = "v1" });
 
-                x.AddSecurityDefinition("Bearer ", new OpenApiSecurityScheme
+                // Bearer token authentication
+                OpenApiSecurityScheme securityDefinition = new OpenApiSecurityScheme()
                 {
-                    Description = "`Token only!!!` - without `Bearer_` prefix",
-                    Type = SecuritySchemeType.Http,
+                    Name = "Bearer",
                     BearerFormat = "JWT",
+                    Scheme = "bearer",
+                    Description = "Specify the authorization token.",
                     In = ParameterLocation.Header,
-                    Scheme = "bearer"
-                });
+                    Type = SecuritySchemeType.Http,
+                };
 
-                x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                x.AddSecurityDefinition("jwt_auth", securityDefinition);
+
+                // Make sure swagger UI requires a Bearer token specified
+                OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
                 {
-                {
-                    new OpenApiSecurityScheme
+                    Reference = new OpenApiReference()
                     {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-            });
+                        Id = "jwt_auth",
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+                OpenApiSecurityRequirement securityRequirements = new OpenApiSecurityRequirement()
+                {
+                    { securityScheme, new string[] { } },
+                };
+
+                x.AddSecurityRequirement(securityRequirements);
+
+
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

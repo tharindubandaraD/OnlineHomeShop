@@ -1,7 +1,6 @@
 using HomeShop.API.Business;
 using HomeShop.Entity.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace HomeShop.API.Controller
@@ -13,10 +12,8 @@ namespace HomeShop.API.Controller
     public class AuthController : ControllerBase
     {
         private readonly IAuthManager _authbusiness;
-        private readonly IConfiguration _config;
-        public AuthController(IConfiguration config, IAuthManager authBusinessLayer)
+        public AuthController(IAuthManager authBusinessLayer)
         {
-            _config = config;
             _authbusiness = authBusinessLayer;
         }
 

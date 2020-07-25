@@ -6,9 +6,9 @@ namespace HomeShop.API.Business.Order
 {
     public interface IOrderManager
     {
-        Task<OrderDto> addOrder(CommonDto commonDto);
-        Task<IEnumerable<GetOrderDetailDto>> getOrder(int userId);
-        Task<bool> deleteOrder(int id);
+        Task<OrderDto> AddOrder(CommonDto commonDto);
+        Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId);
+        Task<bool> DeleteOrder(int id);
 
     }
 }

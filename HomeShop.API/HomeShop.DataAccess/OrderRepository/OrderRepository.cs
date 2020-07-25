@@ -19,7 +19,7 @@ namespace HomeShop.API.Data.OrderRepository
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<OrderDto> addOrder(OrderDto orderDto)
+        public async Task<OrderDto> AddOrder(OrderDto orderDto)
         {
             Order order = _mapper.Map<OrderDto, Order>(orderDto);
             await _dataContext.Orders.AddAsync(order);
@@ -29,7 +29,7 @@ namespace HomeShop.API.Data.OrderRepository
 
         public async Task<OrderDto> CheckOrderStatus(int userId)
         {
-            Order order = await _dataContext.Orders.Where(s => !s.orderStatus && s.UserID == userId).FirstOrDefaultAsync();
+            Order order = await _dataContext.Orders.Where(s => !s.OrderStatus && s.UserID == userId).FirstOrDefaultAsync();
 
             OrderDto orderDto = _mapper.Map<Order, OrderDto>(order);
 
@@ -45,7 +45,7 @@ namespace HomeShop.API.Data.OrderRepository
                                       join
 product in _dataContext.Products on OrderProduct.ProductId equals product.Id
                                       join photo in _dataContext.Photos on product.Id equals photo.ProductId
-                                      where photo.IsMain && !Order.orderStatus && Order.UserID == userId
+                                      where photo.IsMain && !Order.OrderStatus && Order.UserID == userId
                                       select new GetOrderDetailDto()
                                       {
                                           OrderId = Order.OrderID,

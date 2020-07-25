@@ -27,9 +27,9 @@ namespace HomeShop.API.Controller
         /// <summary>Gets the brands.</summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> getBrands()
+        public async Task<IActionResult> GetBrands()
         {
-            var categoryRepository = await _brandRepository.getBrands();
+            var categoryRepository = await _brandRepository.GetBrands();
             var mapcategoryrepository = _mapper.Map<IEnumerable<BrandforDetailDto>>(categoryRepository);
             return Ok(mapcategoryrepository);
         }

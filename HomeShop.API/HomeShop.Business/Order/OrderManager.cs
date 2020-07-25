@@ -1,4 +1,3 @@
-using AutoMapper;
 using HomeShop.API.Data.OrderProductRepository;
 using HomeShop.API.Data.OrderRepository;
 using HomeShop.Entity.Dtos;
@@ -10,22 +9,20 @@ namespace HomeShop.API.Business.Order
     public class OrderManager : IOrderManager
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly IMapper _mapper;
         private readonly IOrderProductRepository _orderProductRepository;
         /// <summary>Initializes a new instance of the <see cref="OrderManager" /> class.</summary>
         /// <param name="orderRepository">The order repository.</param>
         /// <param name="orderProductRepository">The order product repository.</param>
         /// <param name="mapper">The mapper.</param>
-        public OrderManager(IOrderRepository orderRepository, IOrderProductRepository orderProductRepository, IMapper mapper)
+        public OrderManager(IOrderRepository orderRepository, IOrderProductRepository orderProductRepository)
         {
             _orderProductRepository = orderProductRepository;
-            _mapper = mapper;
             _orderRepository = orderRepository;
         }
         /// <summary>Adds the order.</summary>
         /// <param name="commonDto">The common dto.</param>
         /// <returns></returns>
-        public async Task<OrderDto> addOrder(CommonDto commonDto)
+        public async Task<OrderDto> AddOrder(CommonDto commonDto)
         {
             OrderDto orderResult = await _orderRepository.CheckOrderStatus(commonDto.UserID);
 
@@ -34,7 +31,7 @@ namespace HomeShop.API.Business.Order
                 orderResult.OrderStatus = false;
                 orderResult.UserID = commonDto.UserID;
 
-                var orderBusiness = await _orderRepository.addOrder(orderResult);
+                var orderBusiness = await _orderRepository.AddOrder(orderResult);
 
                 OrderProductDto orderProductobject = new OrderProductDto
                 {
@@ -44,7 +41,7 @@ namespace HomeShop.API.Business.Order
                     Quantity = commonDto.Quantity
                 };
 
-                await _orderProductRepository.addOrderProduct(orderProductobject);
+                await _orderProductRepository.AddOrderProduct(orderProductobject);
 
 
                 return orderBusiness;
@@ -60,7 +57,7 @@ namespace HomeShop.API.Business.Order
                 };
 
 
-                await _orderProductRepository.addOrderProduct(orderProductobject);
+                await _orderProductRepository.AddOrderProduct(orderProductobject);
 
                 return orderResult;
             }
@@ -69,7 +66,7 @@ namespace HomeShop.API.Business.Order
         /// <summary>Deletes the order.</summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public async Task<bool> deleteOrder(int id)
+        public async Task<bool> DeleteOrder(int id)
         {
             OrderProductDto orderProduct = await _orderProductRepository.GetOrderProduct(id);
 
@@ -83,7 +80,7 @@ namespace HomeShop.API.Business.Order
         /// <summary>Gets the order.</summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<GetOrderDetailDto>> getOrder(int userId)
+        public async Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId)
         {
             IEnumerable<GetOrderDetailDto> getOrderDetail = await _orderRepository.GetOrder(userId);
             return getOrderDetail;

@@ -6,6 +6,6 @@ namespace HomeShop.API.Data.BrandRepository
 {
     public interface IBrandRepository
     {
-        Task<IEnumerable<Brand>> getBrands();
+        Task<IEnumerable<Brand>> GetBrands();
     }
 }

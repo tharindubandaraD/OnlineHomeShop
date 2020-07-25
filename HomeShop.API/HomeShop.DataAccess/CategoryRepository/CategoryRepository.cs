@@ -1,4 +1,3 @@
-using AutoMapper;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,10 +9,8 @@ namespace HomeShop.API.Data.CategoryRepository
     public class CategoryRepository : ICategoryRepository
     {
         private readonly DataContext _dataContext;
-        private readonly IMapper _mapper;
-        public CategoryRepository(DataContext dataContext, IMapper mapper)
+        public CategoryRepository(DataContext dataContext)
         {
-            _mapper = mapper;
             _dataContext = dataContext;
         }
         public async Task<IEnumerable<CategoryForDetailDto>> GetCategory()
@@ -21,7 +18,7 @@ namespace HomeShop.API.Data.CategoryRepository
 
             var Categories = await (from category in _dataContext.Categories
                                     join
-product in _dataContext.Products on category.CategoryID equals product.CategoryId
+                                    product in _dataContext.Products on category.CategoryID equals product.CategoryId
                                     join photo in _dataContext.Photos on product.Id equals photo.ProductId
                                     where photo.IsMain
                                     select new CategoryForDetailDto()

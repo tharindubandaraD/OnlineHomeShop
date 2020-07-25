@@ -17,7 +17,7 @@ namespace HomeShop.API.Data.OrderProductRepository
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        public async Task<OrderProductDto> addOrderProduct(OrderProductDto orderProductDto)
+        public async Task<OrderProductDto> AddOrderProduct(OrderProductDto orderProductDto)
         {
             OrderProduct orderProduct = _mapper.Map<OrderProductDto, OrderProduct>(orderProductDto);
             await _dataContext.OrderProducts.AddAsync(orderProduct);

@@ -11,10 +11,10 @@ namespace HomeShop.API.Controller
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderManager _orderBusinessLayer;
-        public OrderController(IOrderManager orderBusinessLayer)
+        private readonly IOrderManager _orderManager;
+        public OrderController(IOrderManager orderManager)
         {
-            _orderBusinessLayer = orderBusinessLayer;
+            _orderManager = orderManager;
 
         }
 
@@ -24,7 +24,7 @@ namespace HomeShop.API.Controller
         [HttpPost]
         public async Task<IActionResult> PostOrder(CommonDto commonDto)
         {
-            var order = await _orderBusinessLayer.addOrder(commonDto);
+            var order = await _orderManager.AddOrder(commonDto);
             return Ok(order);
         }
 
@@ -34,7 +34,7 @@ namespace HomeShop.API.Controller
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {
-            var getorderdetails = await _orderBusinessLayer.getOrder(id);
+            var getorderdetails = await _orderManager.GetOrder(id);
             return Ok(getorderdetails);
         }
 
@@ -44,7 +44,7 @@ namespace HomeShop.API.Controller
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
-            await _orderBusinessLayer.deleteOrder(id);
+            await _orderManager.DeleteOrder(id);
             return Ok();
         }
     }

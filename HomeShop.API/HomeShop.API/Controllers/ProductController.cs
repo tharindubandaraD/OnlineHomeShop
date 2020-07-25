@@ -40,7 +40,7 @@ namespace HomeShop.API.Controller
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpGet("category/{id}")]
-        public async Task<IActionResult> getcategoryproduct(int id)
+        public async Task<IActionResult> Getcategoryproduct(int id)
         {
             var productbyCategory = await _productBusinessLayer.GetProductbyCategory(id);
             return Ok(productbyCategory);
