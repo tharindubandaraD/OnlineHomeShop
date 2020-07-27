@@ -7,5 +7,7 @@ namespace HomeShop.API.Business
     {
         Task<bool> Register(UserForRegisterDto userForRegisterDto);
         Task<UserForLoginDtos> Login(string username, string password);
+        Task<UserForOrderDto> GetUser(int Id);
+       
     }
 }

@@ -47,21 +47,44 @@
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('knownAs').errors &&
-          registerForm.get('knownAs').touched
+          registerForm.get('email').errors &&
+          registerForm.get('email').touched 
+      }"
+      type="email"
+      class="form-control"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf=" 
+        registerForm.get('email').touched &&
+        registerForm.get('email').hasError('required') 
+      "
+    >
+      Email required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('fullname').errors &&
+          registerForm.get('fullname').touched
       }"
       class="form-control"
-      placeholder="Known as"
-      formControlName="knownAs"
+      placeholder="Full name"
+      formControlName="fullname"
     />
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.get('knownAs').touched &&
-        registerForm.get('knownAs').hasError('required')
+        registerForm.get('fullname').touched &&
+        registerForm.get('fullname').hasError('required')
       "
     >
-      Known as is required
+      Full Name required
     </div>
   </div>
 
@@ -93,18 +116,18 @@
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('city').errors && registerForm.get('city').touched
+          registerForm.get('address').errors && registerForm.get('address').touched
       }"
       class="form-control"
       placeholder="Address"
-      formControlName="city"
+      formControlName="address"
     />
 
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.get('city').touched &&
-        registerForm.get('city').hasError('required')
+        registerForm.get('address').touched &&
+        registerForm.get('address').hasError('required')
       "
     >
       City is required
@@ -119,7 +142,7 @@
           registerForm.get('country').touched
       }"
       class="form-control"
-      placeholder="City"
+      placeholder="country"
       formControlName="country"
     />
 

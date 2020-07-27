@@ -12,10 +12,11 @@ namespace HomeShop.Entity.Dtos
         [Required]
         [StringLength(8, MinimumLength = 4, ErrorMessage = "Password should be between 4 and 8 characters")]
         public string Password { get; set; }
+        public string FullName { get; set; }
         public string Gender { get; set; }
-        public string KnownAs { get; set; }
+        public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string City { get; set; }
+        public string Address { get; set; }
         public string Country { get; set; }
 
     }

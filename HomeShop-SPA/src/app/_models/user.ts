@@ -1,10 +1,11 @@
 export interface User {
     id: number;
     username: string;
-    knownAs: string;
+    email: string;
     dateOfBirth: Date;
+    fullname: string;
     gender: string;
     photoUrl: string;
-    city: string;
+    address: string;
     country: string;
 }

@@ -21,6 +21,15 @@ namespace HomeShop.API.Business
 
         }
 
+        /// <summary>Gets the user.</summary>
+        /// <param name="Id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<UserForOrderDto> GetUser(int Id)
+        {
+            return await _authRepository.GetUser(Id);
+        }
+
         /// <summary>Logins the specified username.</summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>

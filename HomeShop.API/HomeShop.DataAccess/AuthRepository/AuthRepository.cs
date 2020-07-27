@@ -100,7 +100,14 @@ namespace HomeShop.API.Data
 
         }
 
-
-
+        /// <summary>Gets the user.</summary>
+        /// <param name="Id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public async Task<UserForOrderDto> GetUser(int Id)
+        {
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == Id);
+            return _mapper.Map<UserForOrderDto>(user);
+        }
     }
 }

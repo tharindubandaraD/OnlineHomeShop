@@ -32,6 +32,8 @@ namespace HomeShop.DataAccess.Helpers
             CreateMap<UserForRegisterDto, User>();
 
             CreateMap<User, UserForLoginDtos>();
+
+            CreateMap<User, UserForOrderDto>();
         }
     }
 }
