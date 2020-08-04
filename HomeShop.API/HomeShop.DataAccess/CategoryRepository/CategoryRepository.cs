@@ -29,7 +29,6 @@ namespace HomeShop.API.Data.CategoryRepository
                                         CategoryName = category.Name
 
                                     }).Distinct().ToListAsync();
-
             return Categories;
         }
 

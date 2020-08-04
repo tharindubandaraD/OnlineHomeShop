@@ -19,16 +19,17 @@ namespace HomeShop.API.Data.OrderProductRepository
         {
             _dataContext = dataContext;
             _mapper = mapper;
-        }
+        }       
         /// <summary>Adds the order product.</summary>
         /// <param name="orderProductDto">The order product dto.</param>
         /// <returns></returns>
         public async Task<OrderProductDto> AddOrderProduct(OrderProductDto orderProductDto)
         {
             OrderProduct orderProduct = _mapper.Map<OrderProductDto, OrderProduct>(orderProductDto);
+          
             await _dataContext.OrderProducts.AddAsync(orderProduct);
-            await _dataContext.SaveChangesAsync();
-            return orderProductDto;
+            // return orderProductDto;
+            return null;
         }
 
 

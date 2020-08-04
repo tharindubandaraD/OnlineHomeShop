@@ -47,15 +47,7 @@ namespace HomeShop.API.Controller
                 token = userForLogin.Token
             });
 
-        }
-
-        [Microsoft.AspNetCore.Authorization.Authorize]
-        [HttpGet("user/{id}")]
-        public async Task<IActionResult> GetUser(int id) 
-        {
-            var user = await  _authbusiness.GetUser(id);
-            return Ok(user);
-        }
+        }          
 
      
 

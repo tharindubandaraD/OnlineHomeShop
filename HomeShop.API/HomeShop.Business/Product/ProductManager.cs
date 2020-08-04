@@ -1,5 +1,4 @@
-using AutoMapper;
-using HomeShop.API.Data;
+using HomeShop.DataAccess.UnitofWork;
 using HomeShop.Entity.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,21 +7,17 @@ namespace HomeShop.API.Business
 {
     public class ProductManager : IProductManager
     {
-        private readonly IProductRepository _productRepository;
-        private readonly IMapper _mapper;
-        public ProductManager(IProductRepository productRepository, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public ProductManager(IUnitOfWork unitOfWork)
         {
-            _mapper = mapper;
-            _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
         /// <summary>Gets the product.</summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         public async Task<ProductDetailDto> GetProduct(int id)
         {
-            var product = await _productRepository.GetProduct(id);
-            var productDetail = _mapper.Map<ProductDetailDto>(product);
-            return productDetail;
+            return await _unitOfWork.ProductRepository.GetProduct(id);           
         }
 
         /// <summary>Gets the productby category.</summary>
@@ -30,7 +25,7 @@ namespace HomeShop.API.Business
         /// <returns></returns>
         public async Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int id)
         {
-            var productbyCategory = await _productRepository.GetProductbyCategory(id);
+            var productbyCategory = await _unitOfWork.ProductRepository.GetProductbyCategory(id);
             return productbyCategory;
         }
 
@@ -38,9 +33,7 @@ namespace HomeShop.API.Business
         /// <returns></returns>
         public async Task<IEnumerable<ProductListDto>> GetProducts()
         {
-            var products = await _productRepository.GetProducts();
-            var prdoctsList = _mapper.Map<IEnumerable<ProductListDto>>(products);
-            return prdoctsList;
+            return await _unitOfWork.ProductRepository.GetProducts();                        
         }
     }
 }

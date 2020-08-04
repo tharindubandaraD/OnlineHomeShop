@@ -1,3 +1,4 @@
+using AutoMapper;
 using HomeShop.DataAccess.Model;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,12 @@ namespace HomeShop.API.Data
     public class ProductRepository : IProductRepository
     {
         private readonly DataContext _context;
-        public ProductRepository(DataContext context)
+        private readonly IMapper _mapper;
+
+        public ProductRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         /// <summary>Adds the specified entity.</summary>
         /// <typeparam name="T"></typeparam>
@@ -33,26 +37,20 @@ namespace HomeShop.API.Data
         /// <summary>Gets the product.</summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public async Task<Product> GetProduct(int id)
+        public async Task<ProductDetailDto> GetProduct(int id)
         {
             var product = await _context.Products.Include(p => p.Photos).FirstOrDefaultAsync(i => i.Id == id);
-            return product;
+            return _mapper.Map<ProductDetailDto>(product);
         }
 
         /// <summary>Gets the products.</summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<IEnumerable<ProductListDto>> GetProducts()
         {
             var products = await _context.Products.Include(p => p.Photos).ToListAsync();
-            return products;
+            return _mapper.Map<ProductListDto[]>(products);            
         }
-
-        /// <summary>Saves all.</summary>
-        /// <returns></returns>
-        public async Task<bool> SaveAll()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+              
 
         /// <summary>Gets the productby category.</summary>
         /// <param name="id">The identifier.</param>

@@ -1,4 +1,5 @@
 using HomeShop.API.Data;
+using HomeShop.DataAccess.UnitofWork;
 using HomeShop.Entity.Dtos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,12 +13,12 @@ namespace HomeShop.API.Business
 {
     public class AuthManager : IAuthManager
     {
-        private readonly IAuthRepository _authRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
-        public AuthManager(IAuthRepository authRepository, IConfiguration configuration)
+        public AuthManager(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _configuration = configuration;
-            _authRepository = authRepository;
+            _unitOfWork = unitOfWork;
 
         }
 
@@ -27,7 +28,7 @@ namespace HomeShop.API.Business
         /// <exception cref="NotImplementedException"></exception>
         public async Task<UserForOrderDto> GetUser(int Id)
         {
-            return await _authRepository.GetUser(Id);
+            return await _unitOfWork.AuthRepository.GetUser(Id);
         }
 
         /// <summary>Logins the specified username.</summary>
@@ -36,7 +37,7 @@ namespace HomeShop.API.Business
         /// <returns></returns>
         public async Task<UserForLoginDtos> Login(string username, string password)
         {
-            var userFromRepo = await _authRepository.Login(username.ToLower(), password);
+            var userFromRepo = await _unitOfWork.AuthRepository.Login(username.ToLower(), password);
 
             if (userFromRepo == null)
                 return null;
@@ -75,12 +76,15 @@ namespace HomeShop.API.Business
         /// <returns></returns>
         public async Task<bool> Register(UserForRegisterDto userForRegisterDto)
         {
+           
             userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
 
-            if (await _authRepository.UserExists(userForRegisterDto.UserName))
+            if (await _unitOfWork.AuthRepository.UserExists(userForRegisterDto.UserName))
                 return false;
 
-            await _authRepository.Register(userForRegisterDto, userForRegisterDto.Password);
+            await _unitOfWork.AuthRepository.Register(userForRegisterDto, userForRegisterDto.Password);
+
+            _unitOfWork.Commit();
 
             return true;
 

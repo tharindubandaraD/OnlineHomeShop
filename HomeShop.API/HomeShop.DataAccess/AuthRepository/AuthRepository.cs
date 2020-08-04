@@ -51,7 +51,8 @@ namespace HomeShop.API.Data
 
             ///<summary>add changes to database</summary>
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+
+            //await _context.SaveChangesAsync();
 
 
             ///<summary>returning the user</summary>

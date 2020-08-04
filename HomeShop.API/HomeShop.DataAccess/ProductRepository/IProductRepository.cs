@@ -1,4 +1,3 @@
-using HomeShop.DataAccess.Model;
 using HomeShop.Entity.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,13 +9,11 @@ namespace HomeShop.API.Data
         //T is an any type - phot/product take entity as it a class
         void Add<T>(T entity) where T : class;
 
-        void Delete<T>(T entity) where T : class;
+        void Delete<T>(T entity) where T : class;      
 
-        Task<bool> SaveAll();
+        Task<IEnumerable<ProductListDto>> GetProducts();
 
-        Task<IEnumerable<Product>> GetProducts();
-
-        Task<Product> GetProduct(int id);
+        Task<ProductDetailDto> GetProduct(int id);
 
         Task<IEnumerable<ProductDetailDto>> GetProductbyCategory(int id);
     }

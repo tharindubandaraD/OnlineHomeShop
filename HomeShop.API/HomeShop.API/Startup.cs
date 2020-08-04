@@ -8,6 +8,7 @@ using HomeShop.API.Data.CategoryRepository;
 using HomeShop.API.Data.OrderProductRepository;
 using HomeShop.API.Data.OrderRepository;
 using HomeShop.DataAccess.Helpers;
+using HomeShop.DataAccess.UnitofWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,16 +48,11 @@ namespace HomeShop.API
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddScoped<IProductManager, ProductManager>();
             services.AddScoped<ICategoryManager, CategoryManager>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<IOrderProductRepository, OrderProductRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderManager, OrderManager>();
 
 

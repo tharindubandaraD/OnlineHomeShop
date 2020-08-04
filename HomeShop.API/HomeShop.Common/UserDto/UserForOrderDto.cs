@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HomeShop.Entity.Dtos
+﻿namespace HomeShop.Entity.Dtos
 {
     public class UserForOrderDto
     {

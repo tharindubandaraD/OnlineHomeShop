@@ -15,16 +15,15 @@ namespace HomeShop.API.Controller
         public OrderController(IOrderManager orderManager)
         {
             _orderManager = orderManager;
-
         }
 
         /// <summary>Posts the order.</summary>
         /// <param name="commonDto">The common dto.</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostOrder(CommonDto commonDto)
+        public async Task<IActionResult> PostOrder(OrderDto orderDto)
         {
-            var order = await _orderManager.AddOrder(commonDto);
+            var order = await _orderManager.AddOrder(orderDto);
             return Ok(order);
         }
 
