@@ -3,10 +3,7 @@ using HomeShop.API.Business;
 using HomeShop.API.Business.Category;
 using HomeShop.API.Business.Order;
 using HomeShop.API.Data;
-using HomeShop.API.Data.BrandRepository;
-using HomeShop.API.Data.CategoryRepository;
-using HomeShop.API.Data.OrderProductRepository;
-using HomeShop.API.Data.OrderRepository;
+using HomeShop.API.Exception;
 using HomeShop.DataAccess.Helpers;
 using HomeShop.DataAccess.UnitofWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
@@ -109,12 +107,13 @@ namespace HomeShop.API
         /// <summary>This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</summary>
         /// <param name="app">The application.</param>
         /// <param name="env">The env.</param>
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.ConfigureExceptionHandler(logger);
 
             app.UseSwagger();
 

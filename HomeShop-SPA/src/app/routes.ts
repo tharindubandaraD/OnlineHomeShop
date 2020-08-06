@@ -1,3 +1,4 @@
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { PaymentComponent } from './payment/payment.component';
 import { ProductDetailResolver } from './_resolvers/product-detail.resolver';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
@@ -25,7 +26,7 @@ export const appRouters: Routes = [
 
             {path: 'message', component: MessagesComponent},
 
-            {path: 'payment', component: PaymentComponent}
+            {path: 'payment', component: PaymentComponent, resolve: {userDetails: UserDetailResolver}}
 
         ]
     },

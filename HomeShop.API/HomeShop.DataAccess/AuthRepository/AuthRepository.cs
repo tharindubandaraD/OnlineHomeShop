@@ -2,6 +2,7 @@ using AutoMapper;
 using HomeShop.DataAccess.Model;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace HomeShop.API.Data
@@ -10,11 +11,12 @@ namespace HomeShop.API.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+       
 
         public AuthRepository(DataContext context, IMapper mapper)
         {
             _context = context;
-            _mapper = mapper;
+            _mapper = mapper;           
         }
 
         /// <summary>Logins the specified username.</summary>

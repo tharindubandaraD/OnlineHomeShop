@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace HomeShop.Entity.Dtos
 {
+    [ExcludeFromCodeCoverage]
     public class ProductDetailDto
     {
         public int Id { get; set; }

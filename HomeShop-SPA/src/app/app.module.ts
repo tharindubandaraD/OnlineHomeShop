@@ -30,6 +30,7 @@ import { CartComponent } from './cart/cart.component';
 import { Product_cardComponent } from './products/product_card/product_card.component';
 import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
 import { PaymentComponent } from './payment/payment.component';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -74,7 +75,8 @@ export function tokenGetter() {
       AuthGuard,
       ProductDetailResolver,
       CategoryListResolver,
-      CartDetailResolver
+      CartDetailResolver,
+      UserDetailResolver
    ],
    bootstrap: [
       AppComponent

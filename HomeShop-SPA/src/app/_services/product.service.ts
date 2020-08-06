@@ -20,6 +20,7 @@ constructor(private http: HttpClient) { }
   getProdct(id): Observable<Product>{
   return this.http.get<Product>(this.baseUrl + 'product/' + id);
   }
+
   getCategory(): Observable<Category[]>{
     return this.http.get<Category[]>(this.baseUrl + 'category');
   }
@@ -27,6 +28,5 @@ constructor(private http: HttpClient) { }
   getProductstoCategory(id): Observable<Product[]>{
     return this.http.get<Product[]>(this.baseUrl + 'product/category/' + id.categotyId);
   }
-
 
 }
