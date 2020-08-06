@@ -13,6 +13,8 @@ namespace HomeShop.Entity.Dtos
         public int Total { get; set; }
         public string Address { get; set; }
         public string FullName { get; set; }
+        public int Discount { get; set; }
+        public int GrandTotal { get; set; }
         public List<OrderProductDto> OrderProductDto { get; set; }
 
     }

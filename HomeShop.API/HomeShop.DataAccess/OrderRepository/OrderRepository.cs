@@ -1,6 +1,5 @@
 using AutoMapper;
 using HomeShop.DataAccess.Model;
-using HomeShop.DataAccess.UnitofWork;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

@@ -27,12 +27,7 @@ namespace HomeShop.API.Business.Order
         {
             try
             {
-                        
-                            
-                OrderDto orderResult = await _unitOfWork.OrderRepository.AddOrder(orderDto);
-            
-              //  await _unitOfWork.OrderProductRepository.AddOrderProduct(orderProductDto);
-
+                await _unitOfWork.OrderRepository.AddOrder(orderDto);
                 _unitOfWork.Commit();
                 return null;
               
