@@ -14,6 +14,7 @@ import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -31,6 +32,7 @@ import { Product_cardComponent } from './products/product_card/product_card.comp
 import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
 import { PaymentComponent } from './payment/payment.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -68,7 +70,10 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      NgbModule,
+      NgbPaginationModule,
+      NgbAlertModule
    ],
    providers: [
       ErrorInterceptorProvider,

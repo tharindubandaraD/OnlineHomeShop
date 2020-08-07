@@ -1,28 +1,24 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container"  routerLinkActive="active">
-    <a class="navbar-brand" [routerLink]="['/home']" >H-Shop</a> 
+    <a class="navbar-brand fa fa-"></a> 
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active" >
-        <a class="nav-link" [routerLink]="['/home']" >Home 
+        <a class="nav-link fa fa-home" [routerLink]="['/home']" > Home 
           <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/products']" >Products</a>
+        <a class="nav-link fa fa-shopping-bag" [routerLink]="['/products']" > Products</a>
       </li>
-      <li class="nav-item" routerLinkActive="active" >
-        <a class="nav-link" [routerLink]="['/cart']"  >Cart</a>
-      </li>          
-    </ul>
-
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link fa fa-shopping-cart " [routerLink]="['/cart']"> Cart</a>
+      </li>     
+    </ul>         
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
       <a class="dropdown-toggle text-light" dropdownToggle>
         Welcome {{authService.decodeToken.unique_name | titlecase}}
-      </a>
-
-      <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Edit</a>
-        <div class="dropdown-divider"></div>
+      </a>     
+      <div class="dropdown-menu mt-3" *dropdownMenu>  
         <a class="dropdown-item" href="#" (click)="loggedOut()" ><i class="fa fa-sign-out"></i>Log Out</a>
       </div>
     </div>
