@@ -11,7 +11,9 @@
         <a class="nav-link fa fa-shopping-bag" [routerLink]="['/products']" > Products</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link fa fa-shopping-cart " [routerLink]="['/cart']"> Cart</a>
+        <a class="nav-link fa fa-shopping-cart " [routerLink]="['/cart']"> Cart
+          <span class="badge badge-secondary badge-pill">{{item.length}}</span>
+        </a>
       </li>     
     </ul>         
     <div *ngIf="loggedIn()" class="dropdown" dropdown>

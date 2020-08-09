@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  images = ['https://cdn.dnaindia.com/sites/default/files/styles/full/public/2019/03/13/801559-pubg-03.jpg', 'https://lite.pubg.com/wp-content/uploads/2019/10/image-5-1499x625.jpg', 'https://lite.pubg.com/wp-content/uploads/2019/10/image-5-1499x625.jpg'];
+  images = ['./assets/img-1.png', './assets/img-2.png', './assets/img-3.png'];
   registerMode = false;
   constructor() { }
 

@@ -1,12 +1,14 @@
+<div *ngIf="!registerMode">
 <ngb-carousel *ngIf="images">
   <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
+    <div class="picsum-img-wrapper bg">
       <img [src]="images[0]" alt="Random first slide">
     </div>
     <div class="carousel-caption">
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </div>
+      <h3 style="color: rgb(64, 62, 65);">Best Place to Shop</h3>
+      <p style="color: rgb(64, 62, 65);">Home shop ! the leading market place in Srilanka</p>
+        <button type="submit" class=" btn btn-primary w-40 " (click)="registerToggle()">Click ForRegister</button>
+      </div>
   </ng-template>
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
@@ -15,6 +17,7 @@
     <div class="carousel-caption">
       <h3>Second slide label</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <button type="submit" class=" btn btn-primary w-40 " (click)="registerToggle()">Click ForRegister</button>
     </div>
   </ng-template>
   <ng-template ngbSlide>
@@ -22,7 +25,17 @@
       <img [src]="images[2]" alt="Random third slide">
     </div>
     <div class="carousel-caption">
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      <h3 style="color: rgb(214, 18, 63);">Third slide label</h3>
+      <p style="color: rgb(214, 18, 63);">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      <button type="submit" class=" btn btn-primary w-40 " (click)="registerToggle()">Click ForRegister</button>
     </div>
   </ng-template>
+  </ngb-carousel>
+  </div>
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+          <app-register (registermode)="registerState($event)"></app-register>
+      </div>
+    </div>
+  </div>
