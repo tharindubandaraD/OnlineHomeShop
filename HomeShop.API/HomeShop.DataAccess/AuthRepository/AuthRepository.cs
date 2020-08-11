@@ -2,7 +2,6 @@ using AutoMapper;
 using HomeShop.DataAccess.Model;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace HomeShop.API.Data
