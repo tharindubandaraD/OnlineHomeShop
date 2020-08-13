@@ -31,7 +31,7 @@ namespace HomeShop.API.Business.Order
             {
                 await _unitOfWork.OrderRepository.AddOrder(orderDto);
                 _unitOfWork.Commit();
-                await sendMail(orderDto);
+                sendMail(orderDto);
                 return null;
               
             }
@@ -41,7 +41,7 @@ namespace HomeShop.API.Business.Order
                 return null;
             }
         }
-        private async Task<bool> sendMail(OrderDto orderDto)
+        private void sendMail(OrderDto orderDto)
         {
             string emailbody;
 
@@ -74,7 +74,7 @@ namespace HomeShop.API.Business.Order
 #pragma warning restore S1643 // Strings should not be concatenated using '+' in a loop
             }             
             
-            return await _emailSender.Send(orderDto.Email , "Home Shop - Bill", emailbody);
+            _emailSender.Send(orderDto.Email , "Home Shop - Bill", emailbody);
            
         }
 
