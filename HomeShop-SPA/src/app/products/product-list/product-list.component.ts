@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
       // tslint:disable-next-line: no-string-literal
       this.category = data['category'];
     });
+    this.loadProducts(this.category[0]);
   }
 
   loadProducts(cat: Category) {
