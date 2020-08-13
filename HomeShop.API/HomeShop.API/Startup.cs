@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NETCore.MailKit.Core;
 using System;
 using System.Text;
 
@@ -52,6 +53,8 @@ namespace HomeShop.API
             services.AddScoped<IProductManager, ProductManager>();
             services.AddScoped<ICategoryManager, CategoryManager>();
             services.AddScoped<IOrderManager, OrderManager>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

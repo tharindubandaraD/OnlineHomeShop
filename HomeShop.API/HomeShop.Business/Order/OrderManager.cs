@@ -11,14 +11,16 @@ namespace HomeShop.API.Business.Order
     public class OrderManager : IOrderManager
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailSender _emailSender;
 
         /// <summary>Initializes a new instance of the <see cref="OrderManager" /> class.</summary>
         /// <param name="orderRepository">The order repository.</param>
         /// <param name="orderProductRepository">The order product repository.</param>
         /// <param name="mapper">The mapper.</param>
-        public OrderManager(IUnitOfWork unitOfWork)
+        public OrderManager(IUnitOfWork unitOfWork, IEmailSender emailSender)
         {           
            _unitOfWork = unitOfWork;
+           _emailSender = emailSender;
         }
         /// <summary>Adds the order.</summary>
         /// <param name="commonDto">The common dto.</param>
@@ -29,6 +31,7 @@ namespace HomeShop.API.Business.Order
             {
                 await _unitOfWork.OrderRepository.AddOrder(orderDto);
                 _unitOfWork.Commit();
+                await sendMail(orderDto);
                 return null;
               
             }
@@ -37,6 +40,42 @@ namespace HomeShop.API.Business.Order
                 _unitOfWork.Rollback();
                 return null;
             }
+        }
+        private async Task<bool> sendMail(OrderDto orderDto)
+        {
+            string emailbody;
+
+            emailbody = "<br><br><table border='1'>" +
+            "<tr>" +
+             "<th>Full Name</th>" +
+             "<th>Address</th>" +
+             "<th>Discount</th>" +
+             "<th>Total</th>" +
+            "</tr>" +
+            "<tr>" +
+             "<td>" + orderDto.FullName + "</td>" +
+             "<td>" + orderDto.Address + "</td>" +
+             "<td>" + orderDto.Discount + "</td>" +
+             "<td>" + orderDto.GrandTotal + "</td>" +
+            "</tr>" +
+            "</table><br><br>" + "Item Purchase";
+
+            List<OrderProductDto> orderProductDto = orderDto.OrderProductDto;
+
+            for (int i = 0; i < orderProductDto.Count; i++)
+            {
+#pragma warning disable S1643 // Strings should not be concatenated using '+' in a loop
+                emailbody +=   "<table>" +
+                                            "<tr>" +
+                                            "<td>" + "Name: " + orderProductDto[i].Name + "</td>" +
+                                            "<td>" + " Price: " + orderProductDto[i].Price + "</td>" +
+                                            "</tr>" +
+                                            "</table>";
+#pragma warning restore S1643 // Strings should not be concatenated using '+' in a loop
+            }             
+            
+            return await _emailSender.Send(orderDto.Email , "Home Shop - Bill", emailbody);
+           
         }
 
         /// <summary>Deletes the order.</summary>

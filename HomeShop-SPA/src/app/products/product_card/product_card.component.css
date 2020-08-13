@@ -74,7 +74,7 @@ a
 }
 
 .products-details h6 a:hover {
-    color: #fbb72c;
+    color: #cf0700;
 }
 
 
@@ -91,7 +91,7 @@ a
 
 .products-price {
     font-size: 18px;
-    color: #fbb72c;
+    color: rgb(167, 15, 15);
     font-weight: 600;
 }
 
