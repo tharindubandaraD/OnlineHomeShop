@@ -2,6 +2,7 @@ using AutoMapper;
 using HomeShop.DataAccess.Model;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -98,6 +99,41 @@ namespace HomeShop.API.Data.OrderRepository
 
             return orderDetails;
 
+        }
+
+        public async Task<IEnumerable<OrderInformDto>> GetOrderInfromation(int userId)
+        {
+           var obj =  await (from Order in _dataContext.Orders
+                   join
+                      OrderProduct in _dataContext.OrderProducts on
+                      Order.OrderID equals OrderProduct.OrderId
+                   join
+                     product in _dataContext.Products on OrderProduct.ProductId equals product.Id
+                   where Order.UserID == userId
+                   select new OrderInformDto()
+                   {
+                       OrderID = Order.OrderID,
+                       Address = Order.Address,
+                       Discount = Order.Discount,
+                       GrandTotal = Order.GrandTotal,
+                       OrderDate = Order.OrderDate,
+                       Total = Order.Total,
+                       OrderProducts = new OrderProductsDto
+                       {
+                           ProductName = product.Name,
+                           Price = product.Price,
+                           Quantity = product.Quantity
+                       }
+
+                   }).ToListAsync();
+          
+
+            List<Order> order = await _dataContext.Orders.Where(x => x.UserID == userId).ToListAsync();
+            var  hghh = obj.GroupBy(u => u.OrderID).ToList();
+            
+
+            
+             return _mapper.Map<OrderInformDto[]>(order);
         }
 
         public Task<bool> SaveAll()

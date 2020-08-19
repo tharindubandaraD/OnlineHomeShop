@@ -35,6 +35,8 @@ namespace HomeShop.DataAccess.Helpers
             CreateMap<User, UserForLoginDtos>();
 
             CreateMap<User, UserForOrderDto>();
+
+            CreateMap<Order, OrderInformDto>().ReverseMap();
         }
     }
 }

@@ -1,3 +1,4 @@
+import { ReportComponent } from './report/report.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { PaymentComponent } from './payment/payment.component';
 import { ProductDetailResolver } from './_resolvers/product-detail.resolver';
@@ -10,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import {Routes} from '@angular/router';
 import { CategoryListResolver } from './_resolvers/category-list.resolver';
 import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
+import { OrderDetailResolver } from './_resolvers/order-detail.resolver';
 
 export const appRouters: Routes = [
     {path: '', component: HomeComponent},
@@ -26,7 +28,9 @@ export const appRouters: Routes = [
 
             {path: 'message', component: MessagesComponent},
 
-            {path: 'payment', component: PaymentComponent, resolve: {userDetails: UserDetailResolver}}
+            {path: 'payment', component: PaymentComponent, resolve: {userDetails: UserDetailResolver}},
+
+            {path: 'report', component: ReportComponent, resolve: {orderDetails: OrderDetailResolver}}
 
         ]
     },

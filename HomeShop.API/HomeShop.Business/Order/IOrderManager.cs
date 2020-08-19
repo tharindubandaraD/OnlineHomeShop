@@ -9,6 +9,7 @@ namespace HomeShop.API.Business.Order
         Task<OrderDto> AddOrder(OrderDto orderDto);
         Task<IEnumerable<GetOrderDetailDto>> GetOrder(int userId);
         Task<bool> DeleteOrder(int id);
+        Task<IEnumerable<OrderInformDto>> GetOrderInfromation(int UserId);
 
     }
 }

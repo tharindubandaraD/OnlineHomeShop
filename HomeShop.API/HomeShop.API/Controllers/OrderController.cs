@@ -46,5 +46,12 @@ namespace HomeShop.API.Controller
             await _orderManager.DeleteOrder(id);
             return Ok();
         }
+
+        [HttpGet("orderinformation/{id}")]
+        public async Task<IActionResult> OrderInformation(int id)
+        {
+            return Ok(await _orderManager.GetOrderInfromation(id));
+        }
+
     }
 }

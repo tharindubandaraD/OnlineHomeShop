@@ -63,8 +63,9 @@ a
     margin-bottom: 18px;
 }
 
-.products-details h6 a {
+.products-details h3 a {
     font-weight: 50;
+    font: bold;
     display: block;
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -73,7 +74,7 @@ a
     transition: 0.3s;
 }
 
-.products-details h6 a:hover {
+.products-details h3 a:hover {
     color: #cf0700;
 }
 

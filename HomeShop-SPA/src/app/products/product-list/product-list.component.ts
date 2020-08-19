@@ -35,14 +35,4 @@ export class ProductListComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
-
-  /*loadCategory() {
-    this.productService.getCategory().subscribe((category: Category[]) => {
-      this.category = category;
-    },
-    error => {
-      this.alertify.error(error);
-    });
-  }*/
 }

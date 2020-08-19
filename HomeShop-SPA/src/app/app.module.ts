@@ -17,7 +17,6 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 
-
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
 import { from } from 'rxjs';
@@ -33,6 +32,8 @@ import { CartDetailResolver } from './_resolvers/cart-detail.resolver';
 import { PaymentComponent } from './payment/payment.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderDetailResolver } from './_resolvers/order-detail.resolver';
+import { ReportComponent } from './report/report.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,12 +51,12 @@ export function tokenGetter() {
       ProductDetailComponent,
       CartComponent,
       MessagesComponent,
-      PaymentComponent
+      PaymentComponent,
+      ReportComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
-      BrowserAnimationsModule,
       NgxGalleryModule,
       FormsModule,
       ReactiveFormsModule,
@@ -81,7 +82,8 @@ export function tokenGetter() {
       ProductDetailResolver,
       CategoryListResolver,
       CartDetailResolver,
-      UserDetailResolver
+      UserDetailResolver,
+      OrderDetailResolver
    ],
    bootstrap: [
       AppComponent
