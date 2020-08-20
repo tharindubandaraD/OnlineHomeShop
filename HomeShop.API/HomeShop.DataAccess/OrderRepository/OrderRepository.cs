@@ -2,6 +2,8 @@ using AutoMapper;
 using HomeShop.DataAccess.Model;
 using HomeShop.Entity.Dtos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,37 +105,27 @@ namespace HomeShop.API.Data.OrderRepository
 
         public async Task<IEnumerable<OrderInformDto>> GetOrderInfromation(int userId)
         {
-           var obj =  await (from Order in _dataContext.Orders
-                   join
-                      OrderProduct in _dataContext.OrderProducts on
-                      Order.OrderID equals OrderProduct.OrderId
-                   join
-                     product in _dataContext.Products on OrderProduct.ProductId equals product.Id
-                   where Order.UserID == userId
-                   select new OrderInformDto()
-                   {
-                       OrderID = Order.OrderID,
-                       Address = Order.Address,
-                       Discount = Order.Discount,
-                       GrandTotal = Order.GrandTotal,
-                       OrderDate = Order.OrderDate,
-                       Total = Order.Total,
-                       OrderProducts = new OrderProductsDto
-                       {
-                           ProductName = product.Name,
-                           Price = product.Price,
-                           Quantity = product.Quantity
-                       }
-
-                   }).ToListAsync();
-          
-
             List<Order> order = await _dataContext.Orders.Where(x => x.UserID == userId).ToListAsync();
-            var  hghh = obj.GroupBy(u => u.OrderID).ToList();
-            
+            return _mapper.Map<OrderInformDto[]>(order);
+        }
 
-            
-             return _mapper.Map<OrderInformDto[]>(order);
+        public async Task<IEnumerable<OrderInformProductDto>> GetOrderInformationProduct(int orderId)
+        {
+            var x = await (from orderProducts in _dataContext.OrderProducts
+                                 join
+                                    products in _dataContext.Products on
+                                    orderProducts.ProductId equals products.Id
+                                 where  orderProducts.OrderId == orderId
+                                 select new OrderInformProductDto()
+                                 {
+
+                                   ProductName = products.Name,
+                                   Discount = products.Discount,
+                                   Price = products.Price
+
+                                 }).ToListAsync();
+            return x;
+
         }
 
         public Task<bool> SaveAll()

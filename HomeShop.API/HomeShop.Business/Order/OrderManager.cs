@@ -101,9 +101,15 @@ namespace HomeShop.API.Business.Order
             return getOrderDetail;
         }
 
-        public async Task<IEnumerable<OrderInformDto>> GetOrderInfromation(int UserId)
+        public async Task<IEnumerable<OrderInformProductDto>> GetOrderInformationProduct(int orderId)
         {
-            return await _unitOfWork.OrderRepository.GetOrderInfromation(UserId);            
+            return await _unitOfWork.OrderRepository.GetOrderInformationProduct(orderId);
+        }
+
+        public async Task<IEnumerable<OrderInformDto>> GetOrderInfromation(int userId)
+        {
+            return await _unitOfWork.OrderRepository.GetOrderInfromation(userId);
+           
         }
     }
 }

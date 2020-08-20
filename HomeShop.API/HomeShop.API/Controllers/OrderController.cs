@@ -2,6 +2,7 @@ using HomeShop.API.Business.Order;
 using HomeShop.Entity.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HomeShop.API.Controller
@@ -51,6 +52,12 @@ namespace HomeShop.API.Controller
         public async Task<IActionResult> OrderInformation(int id)
         {
             return Ok(await _orderManager.GetOrderInfromation(id));
+        }
+
+        [HttpGet("orderinformationproduct/{id}")]
+        public async Task<IActionResult> OrderInformationProducts(int id)
+        {
+            return Ok(await _orderManager.GetOrderInformationProduct(id));
         }
 
     }
