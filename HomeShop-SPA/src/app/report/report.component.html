@@ -1,0 +1,40 @@
+<table class="table table-striped table-hover ">
+  <thead>
+  <tr>
+    <th scope="col">OrderID</th>
+    <th scope="col">Date</th>
+    <th scope="col">Address</th>
+    <th scope="col">Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let orderitems of pageOrderDetails" >
+  <tr (click)="orderitems.items.expanded = ! orderitems.items.expanded" (click)="viewExpand(orderitems.items.expanded, orderitems.items.orderID )">
+    <td>
+      {{ orderitems.items.orderID }}
+    </td>
+    <td>     
+      {{ orderitems.items.orderDate }}
+    </td>
+    <td>{{ orderitems.items.address}}</td>
+    <td>{{ orderitems.items.total | currency:'Rs: ' }}</td>
+  </tr>
+  <ng-container  *ngIf="orderitems.items.expanded" >
+    <tr>      
+      <td>Product Details</td>            
+    </tr>
+    <ol>
+      <div *ngFor="let product of orderProductDetail">     
+        <li> {{product.productName}}  ->   
+          {{product.price | currency:'Rs:'}} </li>    
+      </div>      
+    </ol>     
+  </ng-container>
+  </ng-container>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="orderDetails.length" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshData()">
+    </ngb-pagination>
+</div>

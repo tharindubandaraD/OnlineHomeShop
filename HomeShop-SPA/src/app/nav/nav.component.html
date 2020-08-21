@@ -2,11 +2,7 @@
   <div class="container"  routerLinkActive="active">
     <a class="navbar-brand fa fa-"></a> 
 
-    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active" >
-        <a class="nav-link fa fa-home" [routerLink]="['/home']" > Home 
-          <span class="sr-only">(current)</span></a>
-      </li>
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">      
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link fa fa-shopping-bag" [routerLink]="['/products']" > Products</a>
       </li>
