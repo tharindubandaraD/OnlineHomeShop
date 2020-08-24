@@ -1,3 +1,5 @@
+import { AlertifyService } from './../../_services/alertify.service';
+import { CartService } from './../../_services/_cartservice/cart.service';
 import { Product } from './../../_models/product';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -11,7 +13,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class Product_cardComponent implements OnInit {
   @Input() product: Product;
   dicountedPrice: number;
-  constructor() { }
+  constructor(private cartService: CartService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -21,6 +23,19 @@ export class Product_cardComponent implements OnInit {
     return this.product.price - this.dicountedPrice;
     }
     return this.product.price;
+  }
+  addToCart(){
+    console.log(this.product);
+    if (this.product.items == null)
+    {
+       this.product.items = 1;
+    }
+    if (this.cartService.addToCart(this.product)) {
+          this.alertify.success(' product added to cart ');
+    }
+    else{
+          this.alertify.error(' item already added  ');
+    }
   }
 
 }

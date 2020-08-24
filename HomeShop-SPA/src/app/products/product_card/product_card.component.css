@@ -78,6 +78,11 @@ a
     color: #cf0700;
 }
 
+a:hover {
+    color: #cf0700;
+    cursor: pointer;
+}
+
 
 .products-bottom-details {
     overflow: hidden;

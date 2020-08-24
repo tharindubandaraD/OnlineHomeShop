@@ -22,6 +22,8 @@ export class ProductDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   cartComponentLoad = false;
+  payment: any = {};
+  discount: number;
 
   // tslint:disable-next-line: max-line-length
   constructor(private productService: ProductService, private alertify: AlertifyService,
@@ -86,5 +88,20 @@ export class ProductDetailComponent implements OnInit {
     //       console.log(error());
     //    });
     // console.log(ordera);
+  }
+
+  makePurchase(){
+    this.cartService.addToCart(this.product);
+    if (this.product.items == null)
+    {
+       this.product.items = 1;
+    }
+    this.payment.totalPrice = this.product.price * this.product.items;
+    this.discount = this.product.discount / 100;
+    this.payment.discount = this.product.price * this.discount * this.product.items;
+    this.payment.grandTotal = this.payment.totalPrice - this.payment.discount;
+
+    console.log( this.payment.discount );
+    this.cartService.paymentDetails(this.payment);
   }
 }

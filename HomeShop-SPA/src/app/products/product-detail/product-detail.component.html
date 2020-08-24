@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <div>
                         <strong>Price:</strong>
-                        <p>{{product.price}}</p>
+                        <p>{{product.price | currency:'Rs:'}}</p>
                     </div>
                     
                     <div>
@@ -23,9 +23,9 @@
                 </div>
                 <div class="card-footer">
                     <div class="btn-group d-flex">                       
-                        <button class="btn btn-success w-100" (click)="addToCart()">Add to Cart</button>
-                        <button class="btn btn-primary w-100" >Check Out</button>
-                    </div>
+                        <button  class="btn btn-success w-100" (click)="addToCart()">Add to Cart</button>
+                        <button class="btn btn-primary w-100" (click)="makePurchase()" [routerLink]="['/payment']">Check Out</button>
+                    </div>                  
                 </div>
             </div>
         </div>

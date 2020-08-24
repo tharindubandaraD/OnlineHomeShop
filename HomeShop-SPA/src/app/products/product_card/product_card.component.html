@@ -4,9 +4,13 @@
     <img src="{{product.photoUrl }}" alt="{{product.name}}">
   </div>
   <div class="products-details">
-    <h3><a  [routerLink]="['/products/', product.id]" routerLinkActive="router-link-active" >{{product.name}}</a></h3>   
+    <h3><a  [routerLink]="['/products/', product.id]" routerLinkActive="router-link-active" >{{product.name}}</a></h3> 
+    <div>
+      <input ngDefaultControl name="quantity" id="quantity"  type="number" min="1" max="{{product.quantity}}" [(ngModel)]="product.items"  required placeholder="1" >			
+       <a (click)="addToCart()"><i class="fa fa-shopping-cart"></i> + Cart</a>
+     </div>  
     <div class="products-bottom-details">
       <div class="products-price"><small  *ngIf="(product.discount)!=0">{{product.price | currency:'Rs:'}}</small>{{calculatePrice() | currency:'Rs:'}}</div>     
-    </div>
+    </div>    
   </div>
 </div>
