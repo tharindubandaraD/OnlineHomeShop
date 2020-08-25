@@ -14,6 +14,6 @@ namespace HomeShop.DataAccess.Model
         public int Total { get; set; }
         public int Discount { get; set; }
         public int GrandTotal { get; set; }
-        public ICollection<OrderProduct> OrderProduct { get; set; }
+        public List<OrderProduct> OrderProduct { get; set; }
     }
 }

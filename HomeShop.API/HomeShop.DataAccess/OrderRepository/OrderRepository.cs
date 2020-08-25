@@ -41,15 +41,15 @@ namespace HomeShop.API.Data.OrderRepository
             Order order = _mapper.Map<Order>(orderDto);
             await _dataContext.Orders.AddAsync(order);
 
-            await _dataContext.SaveChangesAsync();
+            //await _dataContext.SaveChangesAsync();
 
-            foreach (var orderproduct in orderDto.OrderProductDto)
-            {
-                OrderProduct orderProduct = _mapper.Map<OrderProduct>(orderproduct);
-                orderProduct.OrderId = order.OrderID;
-                await _dataContext.OrderProducts.AddAsync(orderProduct);
+            //foreach (var orderproduct in orderDto.OrderProductDto)
+            //{
+            //    OrderProduct orderProduct = _mapper.Map<OrderProduct>(orderproduct);
+            //    orderProduct.OrderId = order.OrderID;
+            //    await _dataContext.OrderProducts.AddAsync(orderProduct);
 
-            }     
+            //}     
 
             return orderDto;
         }

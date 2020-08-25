@@ -25,7 +25,8 @@ namespace HomeShop.DataAccess.Helpers
 
             CreateMap<Brand, BrandforDetailDto>();
 
-            CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<OrderDto, Order>().ForMember(des => des.OrderProduct, opt => opt.MapFrom(src => src.OrderProductDto)).ReverseMap();
+
 
             CreateMap<OrderProductDto, OrderProduct>()
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id));
