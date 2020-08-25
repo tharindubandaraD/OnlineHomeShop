@@ -14,7 +14,7 @@
       {{ orderitems.items.orderID }}
     </td>
     <td>     
-      {{ orderitems.items.orderDate }}
+      {{ orderitems.items.orderDate | date:'mediumDate'}}
     </td>
     <td>{{ orderitems.items.address}}</td>
     <td>{{ orderitems.items.total | currency:'Rs: ' }}</td>

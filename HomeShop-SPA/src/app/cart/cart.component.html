@@ -22,7 +22,7 @@
                                       </figcaption>
                                   </figure>
                               </td>
-                              <td> <input name="name-{{cartitems.id}}" id="quantity-{{cartitems.id}}"  type="number" min="1" max="{{cartitems.quantity}}" [(ngModel)]="cartitems.items"  required placeholder="1" >
+                              <td> <input name="name-{{cartitems.id}}" id="quantity-{{cartitems.id}}"  type="number" min="1" max="{{cartitems.quantity}}" ngDefaultControl [(ngModel)]="cartitems.items"  required placeholder="1" >
                               <td>
                                   <div class="price-wrap"> <var class="price">{{cartitems.price | currency:'Rs: '}}</var> <small class="text-muted"> discount: {{cartitems.discount}}%  </small> </div>
                               </td>

@@ -27,7 +27,6 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(cat: Category) {
-    console.log(cat);
     this.productService.getProductstoCategory(cat).subscribe((product: Product[]) => {
       this.products = product;
     },

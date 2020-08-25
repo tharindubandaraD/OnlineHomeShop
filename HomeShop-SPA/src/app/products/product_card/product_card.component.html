@@ -1,12 +1,12 @@
 <div class="products-card">
-  <div *ngIf="(product.discount)!=0" class="badge">Discount: {{product.discount}}%</div>
+  <div *ngIf="(product.discount)!=0" class="badge">Offer: {{product.discount}}%</div>
   <div class="products-tumb">
     <img src="{{product.photoUrl }}" alt="{{product.name}}">
   </div>
   <div class="products-details">
     <h3><a  [routerLink]="['/products/', product.id]" routerLinkActive="router-link-active" >{{product.name}}</a></h3> 
     <div>
-      <input ngDefaultControl name="quantity" id="quantity"  type="number" min="1" max="{{product.quantity}}" [(ngModel)]="product.items"  required placeholder="1" >			
+      <input name="quantity" id="quantity"  type="number" min="1" max="{{product.quantity}}" ngDefaultControl [(ngModel)]="product.items"  required placeholder="1" >			
        <a (click)="addToCart()"><i class="fa fa-shopping-cart"></i> + Cart</a>
      </div>  
     <div class="products-bottom-details">

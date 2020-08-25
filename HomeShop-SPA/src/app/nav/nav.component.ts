@@ -31,6 +31,11 @@ export class NavComponent implements OnInit {
     );
   }
 
+  getItemList()
+  {
+    return this.cartService.getItems();
+  }
+
   loggedIn() {
     // const token = localStorage.getItem('token');
     // if this has something then it return true
@@ -40,7 +45,6 @@ export class NavComponent implements OnInit {
 
   loggedOut() {
     localStorage.removeItem('token');
-    console.log('logged out');
     this.router.navigate(['/home']);
   }
 }

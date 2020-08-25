@@ -42,5 +42,14 @@ namespace HomeShop.Tests.Business
             var productObject =  productManager.GetProduct(2);
             Assert.AreEqual("tt", productObject.Result.Name);
         }
+
+        //[TestMethod]
+        //public void GetProductbyCategory_WhenSuccessfull_ReturnProductDetail()
+        //{
+        //    productManager = new ProductManager(_mockUnitOfWork.Object);
+
+        //    var productDetailObject = productManager.GetProductbyCategory(2);
+
+        //}
     }
 }

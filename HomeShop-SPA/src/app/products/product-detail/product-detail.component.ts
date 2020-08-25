@@ -64,7 +64,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(){
-    console.log(this.product);
     if (this.product.items == null)
     {
        this.product.items = 1;
@@ -101,7 +100,6 @@ export class ProductDetailComponent implements OnInit {
     this.payment.discount = this.product.price * this.discount * this.product.items;
     this.payment.grandTotal = this.payment.totalPrice - this.payment.discount;
 
-    console.log( this.payment.discount );
     this.cartService.paymentDetails(this.payment);
   }
 }

@@ -39,6 +39,7 @@ export class PaymentComponent implements OnInit {
     this.orderPayment.userId = this.authService.decodeToken.nameid;
     this.orderPayment.discount = this.payment.discount;
     this.orderPayment.fullName = this.userDetail.fullName;
+    this.orderPayment.orderDate = new Date().toDateString();
     this.orderPayment.address = this.userDetail.address;
     this.orderPayment.grandTotal = this.payment.grandTotal;
     this.orderPayment.total = this.payment.totalPrice;

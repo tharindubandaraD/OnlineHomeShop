@@ -25,7 +25,6 @@ export class Product_cardComponent implements OnInit {
     return this.product.price;
   }
   addToCart(){
-    console.log(this.product);
     if (this.product.items == null)
     {
        this.product.items = 1;

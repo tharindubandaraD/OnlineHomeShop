@@ -41,7 +41,6 @@ export class ReportComponent implements OnInit {
           }, error => {
             this.alertify.error('problem retrieving with data');
           });
-        console.log(this.orderProductDetail);
       }
       else{
         console.log(orderid);
