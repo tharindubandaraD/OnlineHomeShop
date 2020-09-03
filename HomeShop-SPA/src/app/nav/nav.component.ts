@@ -3,6 +3,8 @@ import { AlertifyService } from './../_services/alertify.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { Product } from '../_models/product';
 
 @Component({
   selector: 'app-nav',
@@ -12,11 +14,21 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   item: any = {};
   model: any = {};
+  private subscription: Subscription;
   // tslint:disable-next-line: max-line-length
   constructor(private cartService: CartService, public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    this.item = this.cartService.getItems();
+    this.cartService.updateCartState();
+    this.subscription = this.cartService.cartSubject
+                     .subscribe((product: Product[]) => {
+                         this.item = product;
+                     });
+  }
+
+   // tslint:disable-next-line: use-lifecycle-interface
+   ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   login() {
@@ -29,11 +41,6 @@ export class NavComponent implements OnInit {
         this.router.navigate(['/products']);
       }
     );
-  }
-
-  getItemList()
-  {
-    return this.cartService.getItems();
   }
 
   loggedIn() {

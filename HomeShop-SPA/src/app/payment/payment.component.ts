@@ -9,6 +9,7 @@ import { OrderPayment } from '../_models/orderpayment';
 import { AuthService } from '../_services/auth.service';
 import { UserDetails } from '../_models/userDetails';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-payment',
@@ -21,7 +22,7 @@ export class PaymentComponent implements OnInit {
   items: Product[];
   orderPayment: any = {};
   userDetail: UserDetails;
-
+  private subscription: Subscription;
 
   // tslint:disable-next-line: max-line-length
   constructor(private userservice: UserService, private authService: AuthService, private cartService: CartService, private paymentService: PaymentService, private alertify: AlertifyService, private route: ActivatedRoute) { }
@@ -32,8 +33,19 @@ export class PaymentComponent implements OnInit {
       this.userDetail = data['userDetails'];
     });
    this.payment = this.cartService.getPaymentDetails();
-   this.items = this.cartService.getItems();
+
+   this.cartService.updateCartState();
+   this.subscription = this.cartService.cartSubject
+                    .subscribe((product: Product[]) => {
+                        this.items = product;
+                    });
   }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   assignValue(): OrderPayment {
 
     this.orderPayment.userId = this.authService.decodeToken.nameid;

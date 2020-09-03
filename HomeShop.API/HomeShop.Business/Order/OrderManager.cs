@@ -32,10 +32,9 @@ namespace HomeShop.API.Business.Order
                 await _unitOfWork.OrderRepository.AddOrder(orderDto);
                 _unitOfWork.Commit();
                 sendMail(orderDto);
-                return null;
-              
+                return orderDto;              
             }
-            catch( Exception e )
+            catch( Exception )
             {
                 _unitOfWork.Rollback();
                 return null;

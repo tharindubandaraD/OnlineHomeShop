@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Component, OnInit } from '@angular/core';
 import { Payment } from '../_models/payment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,7 @@ export class CartComponent implements OnInit {
 
   items: Product[];
   payment: any = {};
+  private subscription: Subscription;
 
   constructor(private alertify: AlertifyService, private cartservice: CartService, private router: ActivatedRoute) { }
 
@@ -22,7 +24,17 @@ export class CartComponent implements OnInit {
     //     // tslint:disable-next-line: no-string-literal
     //     this.cart = data['cart'];
     //  });
-    this.items = this.cartservice.getItems();
+    // this.items = this.cartservice.getItems();
+   this.cartservice.updateCartState();
+   this.subscription = this.cartservice.cartSubject
+                    .subscribe((product: Product[]) => {
+                        this.items = product;
+                    });
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   gettotal(){
@@ -56,7 +68,6 @@ export class CartComponent implements OnInit {
 
   removeItem(Item: Product){
     this.cartservice.removeItems(Item.id);
-    this.cartservice.getItems();
    // this.cartservice.removeItemFromCart(this.items.id);
     // console.log(Item.orderProductId);
     // this.alertify.confirm('Are you sure do you want to remove this product?', () => {

@@ -22,5 +22,4 @@ export class CategoryListResolver implements Resolve<Category[]> {
                 })
             );
         }
-
 }

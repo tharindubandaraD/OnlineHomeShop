@@ -30,6 +30,8 @@ export class Product_cardComponent implements OnInit {
        this.product.items = 1;
     }
     if (this.cartService.addToCart(this.product)) {
+         // localStorage.setItem('cartitem', JSON.stringify(this.cartService.items));
+
           this.alertify.success(' product added to cart ');
     }
     else{
